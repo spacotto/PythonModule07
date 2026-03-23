@@ -7,6 +7,9 @@ Demonstration script.
 """
 
 
+from ex0.CreatureCard import CreatureCard
+
+
 def main() -> None:
     """Demo"""
 
@@ -15,6 +18,8 @@ def main() -> None:
 
     print()
     print(' Testing Abstract Base Class Design:')
+    cc = CreatureCard('Fire Dragon', 5, 'Legendary', 7, 5)
+    print(cc.get_card_info())
 
     print()
     print(' CreatureCard Info:')
