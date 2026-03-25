@@ -38,28 +38,58 @@ def main() -> None:
     div('-', 60)
 
     print()
-    print(' Testing Abstract Base Class Design:')
-    cc = CreatureCard('Fire Dragon', 5, 'Legendary', 7, 5)
-    print(f' {cc.get_card_info()}')
+
+    print(bold_white(' Testing Abstract Base Class Design:'))
+
+    # ----------------------------------------------------------------------------
+    #  Test get_card_info()
+    # ----------------------------------------------------------------------------
 
     print()
-    print(' CreatureCard Info:')
+    print(bold_white(' CreatureCard Info:'))
+    fire_dragon = CreatureCard('Fire Dragon', 5, 'Legendary', 7, 5)
+    card_info = fire_dragon.get_card_info()
+    print(f' {card_info}')
+
+    # ----------------------------------------------------------------------------
+    #  Test is_playable() and play()
+    # ----------------------------------------------------------------------------
+
+    mana: int = 6
+
+    game_state: dict = {
+        'mana_available': mana,
+        'mana_used': card_info['cost'],
+        'effect': 'Creature summoned to battlefield',
+        }
 
     print()
-    print(' Playing Fire Dragon with 6 mana available:')
-    print(' Playable: True')
-    print(' Play result:')
+    play: dict = fire_dragon.play(game_state)
+    print(f' Play result: {play}')
+
+    # ----------------------------------------------------------------------------
+    #  Test attack_target()
+    # ----------------------------------------------------------------------------
 
     print()
-    print(' Fire Dragon attacks Goblin Warrior:')
-    print(' Attack result: ')
+    goblin_warrior = CreatureCard('Goblin Warrior', 5, 'Legendary', 7, 5)
+    print(f' Attack result: {fire_dragon.attack_target(goblin_warrior)}')
+
+    # ----------------------------------------------------------------------------
+    #  Test insufficient mana
+    # ----------------------------------------------------------------------------
 
     print()
-    print(' Testing insufficient mana (3 available):')
-    print(' Playable: False')
+    mana_available: int = 3
+    print(f' Testing insufficient mana ({mana_available} available):')
+    fire_dragon.is_playable(mana_available)
+
+    # ----------------------------------------------------------------------------
+    #  End of demo
+    # ----------------------------------------------------------------------------
 
     print()
-    print(' Abstract pattern successfully demonstrated!')
+    print(bold_white(' Abstract pattern successfully demonstrated!'))
 
     print()
 

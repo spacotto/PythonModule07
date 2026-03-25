@@ -27,8 +27,21 @@ class CreatureCard(Card):
         })
 
     def play(self, game_state: dict) -> dict:
-        pass
+        play: dict = {
+             'card_played': self._name,
+             'mana_used': game_state['mana_used'],
+             'effect': game_state['effect']
+             }
+
+        print(f' Playing {self._name} with'
+              f' {game_state["mana_available"]} mana available:')
+
+        print(f' Playable: {self.is_playable(game_state["mana_available"])}')
+
+        return play
 
     def attack_target(self, target) -> dict:
         """Creature combat."""
-        pass
+        result: dict = {}
+        print(f' {self._name} attacks {target}:')
+        return result

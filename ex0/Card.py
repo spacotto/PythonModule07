@@ -33,4 +33,7 @@ class Card(ABC):
         return self._info
 
     def is_playable(self, available_mana: int) -> bool:
-        pass
+        if available_mana < self._cost:
+            return False
+        else:
+            return True
