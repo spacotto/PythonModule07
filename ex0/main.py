@@ -7,7 +7,7 @@ Demonstration script.
 """
 
 # ----------------------------------------------------------------------------
-#  Visual header helper function
+#  Imports
 # ----------------------------------------------------------------------------
 
 from ex0.CreatureCard import CreatureCard
@@ -35,6 +35,7 @@ def div(to_write: str, how_many_times: int) -> None:
 def main() -> None:
     """Demo"""
 
+    red: str = '\033[1;91m'
     white: str = '\033[1;97m'
 
     print()
@@ -50,10 +51,13 @@ def main() -> None:
     # ----------------------------------------------------------------------------
 
     print()
-    color(white, ' CreatureCard Info:')
-    fire_dragon = CreatureCard('Fire Dragon', 5, 'Legendary', 7, 5)
-    card_info = fire_dragon.get_card_info()
-    print(f' {card_info}')
+    try:
+        color(white, ' CreatureCard Info:')
+        fire_dragon = CreatureCard('Fire Dragon', 5, 'Legendary', 7, 5)
+        card_info = fire_dragon.get_card_info()
+        print(f' {card_info}')
+    except Exception as e:
+        color(red, f' ERROR! {e}')
 
     # ----------------------------------------------------------------------------
     #  Test is_playable() and play()
@@ -68,25 +72,36 @@ def main() -> None:
         }
 
     print()
-    play: dict = fire_dragon.play(game_state)
-    print(f' Play result: {play}')
+    try:
+        play: dict = fire_dragon.play(game_state)
+        print(f' Play result: {play}')
+
+    except Exception as e:
+        color(red, f' ERROR! {e}')
 
     # ----------------------------------------------------------------------------
     #  Test attack_target()
     # ----------------------------------------------------------------------------
 
     print()
-    goblin_warrior = CreatureCard('Goblin Warrior', 5, 'Legendary', 7, 5)
-    print(f' Attack result: {fire_dragon.attack_target(goblin_warrior)}')
+    try:
+        goblin_warrior = CreatureCard('Goblin Warrior', 5, 'Legendary', 7, 5)
+        print(f' Attack result: {fire_dragon.attack_target(goblin_warrior)}')
 
+    except Exception as e:
+        color(red, f' ERROR! {e}')
     # ----------------------------------------------------------------------------
     #  Test insufficient mana
     # ----------------------------------------------------------------------------
 
     print()
-    mana_available: int = 3
-    color(white, f' Testing insufficient mana ({mana_available} available):')
-    print(f' Playable: {fire_dragon.is_playable(mana_available)}')
+    try:
+        mana_available: int = 3
+        color(white, f' Testing insufficient mana ({mana_available} available):')
+        print(f' Playable: {fire_dragon.is_playable(mana_available)}')
+
+    except Exception as e:
+        color(red, f' ERROR! {e}')
 
     # ----------------------------------------------------------------------------
     #  End of demo
