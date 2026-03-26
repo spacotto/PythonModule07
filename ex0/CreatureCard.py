@@ -4,17 +4,19 @@ Exercise 0: Card Foundation
 Your first concrete card type.
 """
 
-from abc import ABC, abstractmethod
-from typing import Any, List, Dict, Union, Optional
-from enum import Enum
-
 from .Card import Card
 
 
 class CreatureCard(Card):
     """Your first concrete card type."""
 
-    def __init__(self, name: str, cost: int, rarity: str, attack: int, health: int):
+    def __init__(self, name: str, cost: int, rarity: str,
+                 attack: int, health: int):
+        if not isinstance(attack, int) or attack <= 0:
+            raise ValueError("attack must be a positive integer")
+        if not isinstance(health, int) or health <= 0:
+            raise ValueError("health must be a positive integer")
+
         super().__init__(name, cost, rarity)
         self._type: str = 'Creature'
         self._attack: int = attack
@@ -42,6 +44,11 @@ class CreatureCard(Card):
 
     def attack_target(self, target) -> dict:
         """Creature combat."""
-        result: dict = {}
-        print(f' {self._name} attacks {target}:')
+        result: dict = {
+            'attacker': self._name,
+            'target': target._name,
+            'damage_dealt': self._attack,
+            'combat_resolved': True,
+        }
+        print(f' {self._name} attacks {target._name}:')
         return result

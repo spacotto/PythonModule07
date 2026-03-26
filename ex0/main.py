@@ -17,14 +17,16 @@ from ex0.CreatureCard import CreatureCard
 #  Visual helper functions
 # ----------------------------------------------------------------------------
 
-def bold_white(text: str) -> str:
+def color(color: str, text: str) -> None:
     """A function making strings of text bold white."""
-    color, reset = "\033[1;97m", "\033[0m"
-    return f"{color}{text}{reset}"
+    reset = '\033[0m'
+    print(f'{color}{text}{reset}')
+
 
 def div(to_write: str, how_many_times: int) -> None:
     """Prints a line divider."""
     print(" " + to_write * how_many_times)
+
 
 # ----------------------------------------------------------------------------
 #  Main function
@@ -33,20 +35,22 @@ def div(to_write: str, how_many_times: int) -> None:
 def main() -> None:
     """Demo"""
 
+    white: str = '\033[1;97m'
+
     print()
-    print(bold_white(' 🃏 DataDeck Card Foundation'))
+    color(white, ' 🃏 DataDeck Card Foundation')
     div('-', 60)
 
     print()
 
-    print(bold_white(' Testing Abstract Base Class Design:'))
+    color(white, ' Testing Abstract Base Class Design:')
 
     # ----------------------------------------------------------------------------
     #  Test get_card_info()
     # ----------------------------------------------------------------------------
 
     print()
-    print(bold_white(' CreatureCard Info:'))
+    color(white, ' CreatureCard Info:')
     fire_dragon = CreatureCard('Fire Dragon', 5, 'Legendary', 7, 5)
     card_info = fire_dragon.get_card_info()
     print(f' {card_info}')
@@ -81,15 +85,15 @@ def main() -> None:
 
     print()
     mana_available: int = 3
-    print(f' Testing insufficient mana ({mana_available} available):')
-    fire_dragon.is_playable(mana_available)
+    color(white, f' Testing insufficient mana ({mana_available} available):')
+    print(f' Playable: {fire_dragon.is_playable(mana_available)}')
 
     # ----------------------------------------------------------------------------
     #  End of demo
     # ----------------------------------------------------------------------------
 
     print()
-    print(bold_white(' Abstract pattern successfully demonstrated!'))
+    color(white, ' Abstract pattern successfully demonstrated!')
 
     print()
 
