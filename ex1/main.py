@@ -9,6 +9,9 @@ Demonstration script.
 # ----------------------------------------------------------------------------
 
 from ex0.CreatureCard import CreatureCard
+from .SpellCard import SpellCard
+from .ArtifactCard import ArtifactCard
+from .Deck import Deck
 
 
 # ----------------------------------------------------------------------------
@@ -33,12 +36,31 @@ def div(to_write: str, how_many_times: int) -> None:
 def main() -> None:
     """Demo."""
 
+    red: str = '\033[1;91m'
     white: str = '\033[1;97m'
 
     print()
     color(white, ' 🃏 DataDeck Deck Builder')
     div('-', 60)
 
+    # ----------------------------------------------------------------------------
+    #  Build deck
+    # ----------------------------------------------------------------------------
+
+    print()
+    color(white, ' Building deck with different card types...')
+    deck = Deck()
+    deck.add_card(SpellCard('Lightning Bolt', 3, 'Common', 'damage'))
+    deck.add_card(ArtifactCard('Mana Crystal', 2, 'Common', 5, 'Permanent: +1 mana per turn'))
+    deck.add_card(CreatureCard('Fire Dragon', 5, 'Legendary', 7,  5))
+
+    print(f' Deck stats: {deck.get_deck_stats()}')
+
+    # ----------------------------------------------------------------------------
+    #  Drawing and playing cards
+    # ----------------------------------------------------------------------------
+
+    print()
     color(white, ' Drawing and playing cards:')
 
     # ----------------------------------------------------------------------------
