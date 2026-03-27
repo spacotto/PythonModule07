@@ -19,9 +19,11 @@ class SpellCard(Card):
         if effect_type in valid_effects:
             self._effect_type: str = effect_type
         else:
-            self._effect_type = None
+            raise ValueError(f'Effect must be one of {valid_effects}')
 
     def play(self, game_state: dict) -> dict:
+        super().play(game_state)
+
         play: dict = {
              'card_played': self._name,
              'mana_used': self._cost,
@@ -41,7 +43,8 @@ class SpellCard(Card):
         if self._effect_type == 'debuff':
             play.update({'effect': 'Debuff target'})
 
-        return play
+        game_state.update({'play': play})
+        return game_state
 
     def resolve_effect(self, targets: list) -> dict:
         """Spells are consumed when played (one-time use)."""

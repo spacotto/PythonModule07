@@ -56,13 +56,19 @@ def main() -> None:
     # ----------------------------------------------------------------------------
 
     print()
-    color(white, ' Building deck with different card types...')
-    deck = Deck()
-    deck.add_card(CreatureCard('Fire Dragon', 5, 'Legendary', 7,  5))
-    deck.add_card(SpellCard('Lightning Bolt', 3, 'Common', 'damage'))
-    deck.add_card(ArtifactCard('Mana Crystal', 2, 'Common', 5, 'Permanent: +1 mana per turn'))
 
-    print(f' Deck stats: {deck.get_deck_stats()}')
+    try:
+        color(white, ' Building deck with different card types...')
+        deck = Deck()
+        deck.add_card(CreatureCard('🔥🐲 Fire Dragon', 5, 'Legendary', 7,  5))
+        deck.add_card(SpellCard('⚡ Lightning Bolt', 3, 'Common', 'damage'))
+        deck.add_card(ArtifactCard('💎 Mana Crystal', 2, 'Common', 5,
+                                   'Permanent: +1 mana per turn'))
+
+        print(f' Deck stats: {deck.get_deck_stats()}')
+
+    except Exception as e:
+        color(red, f'ERROR! {e}')
 
     # ----------------------------------------------------------------------------
     #  Drawing and playing cards
@@ -71,22 +77,22 @@ def main() -> None:
     print()
     color(white, ' Drawing and playing cards:')
 
-    deck.shuffle()
+    # deck.shuffle()
 
     print()
     card = deck.draw_card()
-    game_state.update({card._name: card})
-    print(f' Play result: {card.play(game_state)}')
+    game_state = card.play(game_state)
+    print(f' Play result: {game_state["play"]}')
 
     print()
     card = deck.draw_card()
-    game_state.update({card._name: card})
-    print(f' Play result: {card.play(game_state)}')
+    game_state = card.play(game_state)
+    print(f' Play result: {game_state["play"]}')
 
     print()
     card = deck.draw_card()
-    game_state.update({card._name: card})
-    print(f' Play result: {card.play(game_state)}')
+    game_state = card.play(game_state)
+    print(f' Play result: {game_state["play"]}')
 
     # ----------------------------------------------------------------------------
     #  End of demo
