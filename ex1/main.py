@@ -99,7 +99,8 @@ def main() -> None:
     # ----------------------------------------------------------------------------
 
     print()
-    color(white, ' Polymorphism in action: Same interface, different card behaviors!')
+    color(white, ' Polymorphism in action:'
+                 ' Same interface, different card behaviors!')
 
     print()
 

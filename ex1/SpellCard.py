@@ -31,11 +31,11 @@ class SpellCard(Card):
 
         if self._effect_type == 'damage':
             x: int = random.randint(1, 10)
-            play.update({'effect': f'Deal {x} damage to target' })
+            play.update({'effect': f'Deal {x} damage to target'})
 
         if self._effect_type == 'heal':
-            x: int = random.randint(1, 10)
-            play.update({'effect': f'Heal {x} HP to target'})
+            y: int = random.randint(1, 10)
+            play.update({'effect': f'Heal {y} HP to target'})
 
         if self._effect_type == 'buff':
             play.update({'effect': 'Buff target'})
@@ -48,4 +48,5 @@ class SpellCard(Card):
 
     def resolve_effect(self, targets: list) -> dict:
         """Spells are consumed when played (one-time use)."""
-        pass
+        result: dict = {}
+        return result

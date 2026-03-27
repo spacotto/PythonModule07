@@ -52,8 +52,6 @@ class Deck():
 
     def draw_card(self) -> Card:
         """Removes and returns the top card from the deck."""
-        if not self._cards:
-            return None
 
         # 1. Get top deck card
         card = self._cards[0]
@@ -82,4 +80,3 @@ class Deck():
         }
 
         return deck_stats
-
