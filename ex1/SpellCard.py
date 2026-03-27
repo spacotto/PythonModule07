@@ -9,9 +9,9 @@ from ex0.Card import Card
 
 
 class SpellCard(Card):
+    """Processes instant magical effects"""
 
     def __init__(self, name: str, cost: int, rarity: str, effect_type: str):
-        """Processes instant magical effects"""
         super().__init__(name, cost, rarity)
         self._type: str = 'Spell'
 

@@ -47,58 +47,65 @@ def main() -> None:
     color(white, ' Testing Abstract Base Class Design:')
 
     # ----------------------------------------------------------------------------
-    #  Test get_card_info()
+    #  Game state: contains all the cards in game
+    #  Mana: players' resource to play cards
+    # ----------------------------------------------------------------------------
+
+    mana: int = 8
+    game_state: dict = {'mana': mana}
+
+    # ----------------------------------------------------------------------------
+    #  Get info of a card
     # ----------------------------------------------------------------------------
 
     print()
     try:
         color(white, ' CreatureCard Info:')
-        fire_dragon = CreatureCard('Fire Dragon', 5, 'Legendary', 7, 5)
+        fire_dragon = CreatureCard('🔥🐲 Fire Dragon', 5, 'Legendary', 7, 5)
         card_info = fire_dragon.get_card_info()
         print(f' {card_info}')
     except Exception as e:
         color(red, f' ERROR! {e}')
 
     # ----------------------------------------------------------------------------
-    #  Test is_playable() and play()
+    #  Try to play a card
     # ----------------------------------------------------------------------------
-
-    mana: int = 6
-
-    game_state: dict = {
-        'mana_available': mana,
-        'mana_used': card_info['cost'],
-        'effect': 'Creature summoned to battlefield',
-        }
 
     print()
     try:
-        play: dict = fire_dragon.play(game_state)
-        print(f' Play result: {play}')
+        card = fire_dragon._name
+        mana = game_state['mana']
+        print(f' Playing {card} with {mana} mana available:')
+
+        print(f' Playable: {fire_dragon.is_playable(mana)}')
+
+        game_state = fire_dragon.play(game_state)
+        print(f' Play result: {game_state["play"]}')
 
     except Exception as e:
         color(red, f' ERROR! {e}')
 
     # ----------------------------------------------------------------------------
-    #  Test attack_target()
+    #  Try to attack a target
     # ----------------------------------------------------------------------------
 
     print()
     try:
-        goblin_warrior = CreatureCard('Goblin Warrior', 5, 'Legendary', 7, 5)
+        goblin_warrior = CreatureCard('🐸⚔️ Goblin Warrior', 2, 'Common', 2, 1)
         print(f' Attack result: {fire_dragon.attack_target(goblin_warrior)}')
 
     except Exception as e:
         color(red, f' ERROR! {e}')
+
     # ----------------------------------------------------------------------------
     #  Test insufficient mana
     # ----------------------------------------------------------------------------
 
     print()
     try:
-        mana_available: int = 3
-        color(white, f' Testing insufficient mana ({mana_available} available):')
-        print(f' Playable: {fire_dragon.is_playable(mana_available)}')
+        mana = game_state['mana']
+        color(white, f' Testing insufficient mana ({mana} available):')
+        print(f' Playable: {fire_dragon.is_playable(mana)}')
 
     except Exception as e:
         color(red, f' ERROR! {e}')
