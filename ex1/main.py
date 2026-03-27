@@ -44,15 +44,23 @@ def main() -> None:
     div('-', 60)
 
     # ----------------------------------------------------------------------------
+    #  Game state: contains all the cards in game
+    #  Mana: players' resource to play cards
+    # ----------------------------------------------------------------------------
+
+    mana: int = 10
+    game_state: dict = {'mana': mana}
+
+    # ----------------------------------------------------------------------------
     #  Build deck
     # ----------------------------------------------------------------------------
 
     print()
     color(white, ' Building deck with different card types...')
     deck = Deck()
+    deck.add_card(CreatureCard('Fire Dragon', 5, 'Legendary', 7,  5))
     deck.add_card(SpellCard('Lightning Bolt', 3, 'Common', 'damage'))
     deck.add_card(ArtifactCard('Mana Crystal', 2, 'Common', 5, 'Permanent: +1 mana per turn'))
-    deck.add_card(CreatureCard('Fire Dragon', 5, 'Legendary', 7,  5))
 
     print(f' Deck stats: {deck.get_deck_stats()}')
 
@@ -62,6 +70,23 @@ def main() -> None:
 
     print()
     color(white, ' Drawing and playing cards:')
+
+    deck.shuffle()
+
+    print()
+    card = deck.draw_card()
+    game_state.update({card._name: card})
+    print(f' Play result: {card.play(game_state)}')
+
+    print()
+    card = deck.draw_card()
+    game_state.update({card._name: card})
+    print(f' Play result: {card.play(game_state)}')
+
+    print()
+    card = deck.draw_card()
+    game_state.update({card._name: card})
+    print(f' Play result: {card.play(game_state)}')
 
     # ----------------------------------------------------------------------------
     #  End of demo
