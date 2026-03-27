@@ -14,14 +14,14 @@ class Card(ABC):
     def __init__(self, name: str, cost: int, rarity: str):
 
         if not isinstance(name, str):
-             raise ValueError("Name must be a str")
+            raise ValueError("Name must be a str")
 
         if not isinstance(cost, int) or cost < 0:
-             raise ValueError("Cost must be a positive integer")
+            raise ValueError("Cost must be a positive integer")
 
         valid_rarity: list = ['Common', 'Uncommon', 'Rare', 'Legendary']
         if rarity not in valid_rarity:
-             raise ValueError(f"Rarity must be one of {valid_rarity}")
+            raise ValueError(f"Rarity must be one of {valid_rarity}")
 
         self._name: str = name
         self._cost: int = cost
