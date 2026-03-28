@@ -4,6 +4,8 @@ Exercise 0: Card Foundation
 Your first concrete card type.
 """
 
+from typing import Dict, Any
+
 from .Card import Card
 
 
@@ -24,7 +26,7 @@ class CreatureCard(Card):
         self._health: int = health
         self._effect: str = 'Creature summoned to battlefield'
 
-    def play(self, game_state: dict) -> dict:
+    def play(self, game_state: dict) -> Dict[str, Any]:
         super().play(game_state)
 
         play: dict = {}
@@ -35,7 +37,7 @@ class CreatureCard(Card):
         game_state.update({'play': play})
         return game_state
 
-    def get_card_info(self) -> dict:
+    def get_card_info(self) -> Dict[str, Any]:
         """Builds a dictionary including current attack and health."""
         info = super().get_card_info()
 
@@ -47,7 +49,7 @@ class CreatureCard(Card):
 
         return info
 
-    def attack_target(self, target) -> dict:
+    def attack_target(self, target: 'CreatureCard') -> Dict[str, Any]:
         """Creature combat."""
         result: dict = {
             'attacker': self._name,
