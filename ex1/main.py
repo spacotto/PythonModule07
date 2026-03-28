@@ -77,7 +77,7 @@ def main() -> None:
     print()
     color(white, ' Drawing and playing cards:')
 
-    # deck.shuffle()
+    deck.shuffle()
 
     print()
     card = deck.draw_card()
