@@ -10,6 +10,8 @@ Demonstration script.
 #  Imports
 # ----------------------------------------------------------------------------
 
+from .EliteCard import EliteCard
+
 # ----------------------------------------------------------------------------
 #  Visual helper functions
 # ----------------------------------------------------------------------------
@@ -51,6 +53,8 @@ def main() -> None:
     print()
     color(white, ' Playing Arcane Warrior (Elite Card):')
 
+    arcane_warrior = EliteCard('Arcane Warrior', 6, 'Legendary', 5, 10, 3, 8)
+
     # ----------------------------------------------------------------------------
     #  Combat phase
     # ----------------------------------------------------------------------------
@@ -58,12 +62,24 @@ def main() -> None:
     print()
     color(white, ' Combat phase:')
 
+    attack_result = arcane_warrior.attack("Enemy")
+    print(f" Attack result: {attack_result}")
+
+    defense_result = arcane_warrior.defend(5)
+    print(f" Defense result: {defense_result}")
+
     # ----------------------------------------------------------------------------
     #  Magical phase
     # ----------------------------------------------------------------------------
 
     print()
     color(white, ' Magic phase:')
+
+    spell_result = arcane_warrior.cast_spell("Fireball", ["Enemy1", "Enemy2"])
+    print(f" Spell cast: {spell_result}")
+
+    mana_result = arcane_warrior.channel_mana(3)
+    print(f" Mana channel: {mana_result}")
 
     # ----------------------------------------------------------------------------
     #  End of demo

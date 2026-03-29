@@ -5,6 +5,9 @@ Abstract magic interface
 """
 
 from abc import ABC, abstractmethod
+from typing import Dict, Any, List
+
+from ex0.Card import Card
 
 
 class Magical(ABC):
@@ -13,13 +16,13 @@ class Magical(ABC):
         pass
 
     @abstractmethod
-    def cast_spell(self, spell_name: str, targets: list) -> dict:
+    def cast_spell(self, spell_name: str, targets: List[Card]) -> Dict[str, Any]:
         pass
 
     @abstractmethod
-    def channel_mana(self, amount: int) -> dict:
+    def channel_mana(self, amount: int) -> Dict[str, Any]:
         pass
 
     @abstractmethod
-    def get_magic_stats(self) -> dict:
+    def get_magic_stats(self) -> Dict[str, Any]:
         pass

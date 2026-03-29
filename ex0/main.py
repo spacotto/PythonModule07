@@ -61,7 +61,7 @@ def main() -> None:
     print()
     try:
         color(white, ' CreatureCard Info:')
-        fire_dragon = CreatureCard('🔥🐲 Fire Dragon', 5, 'Legendary', 7, 5)
+        fire_dragon = CreatureCard('Fire Dragon', 5, 'Legendary', 7, 5)
         card_info = fire_dragon.get_card_info()
         print(f' {card_info}')
     except Exception as e:
@@ -91,7 +91,7 @@ def main() -> None:
 
     print()
     try:
-        goblin_warrior = CreatureCard('🐸⚔️ Goblin Warrior', 2, 'Common', 2, 1)
+        goblin_warrior = CreatureCard('Goblin Warrior', 2, 'Common', 2, 1)
         print(f' Attack result: {fire_dragon.attack_target(goblin_warrior)}')
 
     except Exception as e:

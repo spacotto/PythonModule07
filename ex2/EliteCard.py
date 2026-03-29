@@ -4,31 +4,81 @@ Exercise 2: Ability System
 Multiple inheritance implementation
 """
 
+from typing import Dict, Any, List
+from enum import Enum
+import random
+
 from ex0.Card import Card
+from .Combatable import Combatable
+from .Magical import Magical
 
 
 class EliteCard(Card, Combatable, Magical):
 
-    def __init__(self) -> None:
-        pass
+    def __init__(self, name: str, cost: int, rarity: str,
+                 attack: int, health: int, defense: int,
+                 mana: int) -> None:
+        Card.__init__(self, name, cost, rarity)
 
-    def play(self, game_state: dict) -> dict
-        pass
+        self._attack: int = attack
+        self._health: int = health
+        self._defense: int = defense
 
-    def attack(self, target) -> dict
-        pass
+        self._mana: int = mana
 
-    def defend(self, incoming_damage: int) -> dict:
-        pass
+    def play(self, game_state: Dict[str, Any]) -> Dict[str, Any]:
+        Card.play(self, game_state)
+        game_state['play'] = {
+            'card_played': self._name,
+            'mana_used': self._cost,
+            'effect': 'Elite champion enters the battle'
+        }
+        return game_state
 
-    def get_combat_stats(self) -> dict:
-        pass
+    def attack(self, target: Card) -> Dict[str, Any]:
+        target_name = getattr(target, '_name', str(target))
+        return {
+            'attacker': self._name,
+            'target': target_name,
+            'damage': self._attack,
+            'combat_type': 'melee'
+        }
 
-    def cast_spell(self, spell_name: str, targets: list) -> dict
-        pass
+    def defend(self, incoming_damage: int) -> Dict[str, Any]:
+        damage_taken = max(0, incoming_damage - self._defense)
+        self._health -= damage_taken
+        return {
+            'defender': self._name,
+            'damage_taken': damage_taken,
+            'damage_blocked': min(incoming_damage, self._defense),
+            'still_alive': self._health > 0
+        }
 
-    def channel_mana(self, amount: int) -> dict:
-        pass
+    def get_combat_stats(self) -> Dict[str, Any]:
+        return {
+                'attack': self._attack,
+                'defense': self._defense,
+                'health': self._health
+        }
 
-    def get_magic_stats(self) -> dict:
-        pass
+    def cast_spell(self, spell_name: str, targets: List[Any]) -> Dict[str, Any]:
+        target_names = [getattr(t, '_name', str(t)) for t in targets]
+        mana_cost = 4
+        self._mana -= mana_cost
+
+        return {
+            'caster': self._name,
+            'spell': spell_name,
+            'targets': target_names,
+            'mana_used': mana_cost
+        }
+
+    def channel_mana(self, amount: int) -> Dict[str, Any]:
+        self._mana += amount
+        return {
+            'channeled': amount,
+            'total_mana': self._mana
+        }
+
+    def get_magic_stats(self) -> Dict[str, Any]:
+        return {'mana': self._mana_pool}

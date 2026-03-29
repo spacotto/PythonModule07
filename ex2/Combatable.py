@@ -5,21 +5,24 @@ Abstract combat interface
 """
 
 from abc import ABC, abstractmethod
+from typing import Dict, Any, List
+
+from ex0.Card import Card
 
 
-class Combatable(ABC)
+class Combatable(ABC):
 
     def __init__(self) -> None:
         pass
 
     @abstractmethod
-    def attack(self, target) -> dict:
+    def attack(self, target: List[Card]) -> Dict[str, Any]:
         pass
 
     @abstractmethod
-    def defend(self, incoming_damage: int) -> dict:
+    def defend(self, incoming_damage: int) -> Dict[str, Any]:
         pass
 
     @abstractmethod
-    def get_combat_stats(self) -> dict:
+    def get_combat_stats(self) -> Dict[str, Any]:
         pass
