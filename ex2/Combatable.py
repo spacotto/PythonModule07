@@ -16,7 +16,7 @@ class Combatable(ABC):
         pass
 
     @abstractmethod
-    def attack(self, target: List[Card]) -> Dict[str, Any]:
+    def attack(self, target: Any) -> Dict[str, Any]:
         pass
 
     @abstractmethod

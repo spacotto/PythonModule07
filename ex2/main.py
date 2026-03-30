@@ -10,6 +10,7 @@ Demonstration script.
 #  Imports
 # ----------------------------------------------------------------------------
 
+from ex0 import CreatureCard
 from .EliteCard import EliteCard
 
 # ----------------------------------------------------------------------------
@@ -54,6 +55,8 @@ def main() -> None:
     color(white, ' Playing Arcane Warrior (Elite Card):')
 
     arcane_warrior = EliteCard('Arcane Warrior', 6, 'Legendary', 5, 10, 3, 8)
+    fire_dragon = CreatureCard('Fire Dragon', 5, 'Legendary', 7, 5)
+    goblin_warrior = CreatureCard('Goblin Warrior', 2, 'Common', 2, 1)
 
     # ----------------------------------------------------------------------------
     #  Combat phase
@@ -62,7 +65,7 @@ def main() -> None:
     print()
     color(white, ' Combat phase:')
 
-    attack_result = arcane_warrior.attack("Enemy")
+    attack_result = arcane_warrior.attack(fire_dragon)
     print(f" Attack result: {attack_result}")
 
     defense_result = arcane_warrior.defend(5)
@@ -75,7 +78,7 @@ def main() -> None:
     print()
     color(white, ' Magic phase:')
 
-    spell_result = arcane_warrior.cast_spell("Fireball", ["Enemy1", "Enemy2"])
+    spell_result = arcane_warrior.cast_spell("Fireball", [fire_dragon, goblin_warrior])
     print(f" Spell cast: {spell_result}")
 
     mana_result = arcane_warrior.channel_mana(3)

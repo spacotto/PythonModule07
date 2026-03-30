@@ -8,7 +8,8 @@ from typing import Dict, Any, List
 from enum import Enum
 import random
 
-from ex0.Card import Card
+from ex0 import Card
+from ex1 import Spells
 from .Combatable import Combatable
 from .Magical import Magical
 
@@ -35,11 +36,11 @@ class EliteCard(Card, Combatable, Magical):
         }
         return game_state
 
-    def attack(self, target: Card) -> Dict[str, Any]:
-        target_name = getattr(target, '_name', str(target))
+    def attack(self, target: Any) -> Dict[str, Any]:
+        """Attack a Creature or a Player."""
         return {
             'attacker': self._name,
-            'target': target_name,
+            'target': target._name,
             'damage': self._attack,
             'combat_type': 'melee'
         }
@@ -62,10 +63,26 @@ class EliteCard(Card, Combatable, Magical):
         }
 
     def cast_spell(self, spell_name: str, targets: List[Any]) -> Dict[str, Any]:
-        target_names = [getattr(t, '_name', str(t)) for t in targets]
-        mana_cost = 4
+        """Cast a spell against a Creature or a Player"""
+
+        # 1. Inspect the registry from ex1
+        spell_record = None
+        for spell in Spells:
+            if spell.s_name == spell_name:
+                spell_record = spell
+                break
+
+        if not spell_record:
+            raise ValueError(f"'{spell_name}' is not a spell.")
+
+        # 2. Extract the cost
+        mana_cost = spell_record.s_cost
         self._mana -= mana_cost
 
+        # 3. Secure the target
+        target_names = [getattr(t, '_name', str(t)) for t in targets]
+
+        # 4. Log the action result
         return {
             'caster': self._name,
             'spell': spell_name,

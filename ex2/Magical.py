@@ -16,7 +16,7 @@ class Magical(ABC):
         pass
 
     @abstractmethod
-    def cast_spell(self, spell_name: str, targets: List[Card]) -> Dict[str, Any]:
+    def cast_spell(self, spell_name: str, targets: List[Any]) -> Dict[str, Any]:
         pass
 
     @abstractmethod
