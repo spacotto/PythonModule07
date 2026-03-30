@@ -8,7 +8,7 @@ from typing import Dict, Any, List
 from enum import Enum
 import random
 
-from ex0.Card import Card
+from ex0 import Card
 
 
 # ----------------------------------------------------------------------------
