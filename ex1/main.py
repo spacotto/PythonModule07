@@ -60,39 +60,43 @@ def main() -> None:
     try:
         color(white, ' Building deck with different card types...')
         deck = Deck()
-        deck.add_card(CreatureCard('🔥🐲 Fire Dragon', 5, 'Legendary', 7,  5))
-        deck.add_card(SpellCard('⚡ Lightning Bolt', 3, 'Common', 'damage'))
-        deck.add_card(ArtifactCard('💎 Mana Crystal', 2, 'Common', 5,
+        deck.add_card(CreatureCard('Fire Dragon', 5, 'Legendary', 7,  5))
+        deck.add_card(SpellCard("Lightning Bolt", 3, "Common", "damage"))
+        deck.add_card(ArtifactCard('Mana Crystal', 2, 'Common', 5,
                                    'Permanent: +1 mana per turn'))
 
         print(f' Deck stats: {deck.get_deck_stats()}')
 
     except Exception as e:
-        color(red, f'ERROR! {e}')
+        color(red, f' ERROR! {e}')
 
     # ----------------------------------------------------------------------------
     #  Drawing and playing cards
     # ----------------------------------------------------------------------------
 
-    print()
-    color(white, ' Drawing and playing cards:')
+    try:
+        print()
+        color(white, ' Drawing and playing cards:')
 
-    deck.shuffle()
+        deck.shuffle()
 
-    print()
-    card = deck.draw_card()
-    game_state = card.play(game_state)
-    print(f' Play result: {game_state["play"]}')
+        print()
+        card = deck.draw_card()
+        game_state = card.play(game_state)
+        print(f' Play result: {game_state["play"]}')
 
-    print()
-    card = deck.draw_card()
-    game_state = card.play(game_state)
-    print(f' Play result: {game_state["play"]}')
+        print()
+        card = deck.draw_card()
+        game_state = card.play(game_state)
+        print(f' Play result: {game_state["play"]}')
 
-    print()
-    card = deck.draw_card()
-    game_state = card.play(game_state)
-    print(f' Play result: {game_state["play"]}')
+        print()
+        card = deck.draw_card()
+        game_state = card.play(game_state)
+        print(f' Play result: {game_state["play"]}')
+
+    except Exception as e:
+        color(red, f' ERROR! {e}')
 
     # ----------------------------------------------------------------------------
     #  End of demo
