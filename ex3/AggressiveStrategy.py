@@ -21,11 +21,12 @@ class AggressiveStrategy():
     def __init__(self) -> None:
         pass
 
-    def execute_turn(self, hand: List[Card], battlefield: List[Card]) -> Dict[str, Any]
+    def execute_turn(self, hand: List[Card],
+                     battlefield: List[Card]) -> Dict[str, Any]:
         pass
 
-    def get_strategy_name(self) -> str
+    def get_strategy_name(self) -> str:
         pass
 
-    def prioritize_targets(self, available_targets: List[Any]) -> List[Any]
+    def prioritize_targets(self, available_targets: List[Any]) -> List[Any]:
         pass

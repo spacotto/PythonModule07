@@ -7,6 +7,9 @@ Abstract factory interface
 from abc import ABC, abstractmethod
 from typing import Dict, Any
 
+from ex0 import Card
+
+
 class CardFactory(ABC):
 
     def __init__(self) -> None:

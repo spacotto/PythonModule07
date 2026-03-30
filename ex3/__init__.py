@@ -7,8 +7,9 @@ Package initialization file.
 from .GameStrategy import GameStrategy
 from .CardFactory import CardFactory
 from .AggressiveStrategy import AggressiveStrategy
-from .FantasyCard import FantasyCard
-from .FactoryGameEngine import FactoryGameEngine
+from .FantasyCardFactory import FantasyCardFactory
+from .GameEngine import GameEngine
 
 
-__all__ = []
+__all__ = ['GameStrategy', 'CardFactory', 'AggressiveStrategy',
+           'FantasyCardFactory', 'GameEngine']
