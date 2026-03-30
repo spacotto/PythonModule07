@@ -25,9 +25,24 @@ class Creatures(Enum):
     FOREST_SPRITE = ("Forest Sprite", 1, "Common", 1, 1)
 
     @property
-    def creature_name(self) -> str:
+    def c_name(self) -> str: 
         return self.value[0]
-
+    
+    @property
+    def c_cost(self) -> int: 
+        return self.value[1]
+    
+    @property
+    def c_rarity(self) -> str: 
+        return self.value[2]
+    
+    @property
+    def c_attack(self) -> int: 
+        return self.value[3]
+    
+    @property
+    def c_health(self) -> int: 
+        return self.value[4]
 
 # ----------------------------------------------------------------------------
 #  CreatureCard
