@@ -54,35 +54,48 @@ def main() -> None:
     print()
     color(white, ' Playing Arcane Warrior (Elite Card):')
 
-    arcane_warrior = EliteCard('Arcane Warrior', 6, 'Legendary', 5, 10, 3, 8)
-    fire_dragon = CreatureCard('Fire Dragon', 5, 'Legendary', 7, 5)
-    goblin_warrior = CreatureCard('Goblin Warrior', 2, 'Common', 2, 1)
+    try:
+        arcane_warrior = EliteCard('Arcane Warrior', 6, 'Legendary', 5, 10, 3, 8)
+        fire_dragon = CreatureCard('Fire Dragon', 5, 'Legendary', 7, 5)
+        goblin_warrior = CreatureCard('Goblin Warrior', 2, 'Common', 2, 1)
+
+    except Exception as e:
+        color(red, f' ERROR! {e}')
 
     # ----------------------------------------------------------------------------
     #  Combat phase
     # ----------------------------------------------------------------------------
 
-    print()
-    color(white, ' Combat phase:')
+        print()
+        color(white, ' Combat phase:')
 
-    attack_result = arcane_warrior.attack(fire_dragon)
-    print(f" Attack result: {attack_result}")
+    try:
+        attack_result = arcane_warrior.attack(fire_dragon)
+        print(f" Attack result: {attack_result}")
 
-    defense_result = arcane_warrior.defend(5)
-    print(f" Defense result: {defense_result}")
+        defense_result = arcane_warrior.defend(5)
+        print(f" Defense result: {defense_result}")
+
+    except Exception as e:
+        color(red, f' ERROR! {e}')
 
     # ----------------------------------------------------------------------------
     #  Magical phase
     # ----------------------------------------------------------------------------
 
-    print()
-    color(white, ' Magic phase:')
+        print()
+        color(white, ' Magic phase:')
 
-    spell_result = arcane_warrior.cast_spell("Fireball", [fire_dragon, goblin_warrior])
-    print(f" Spell cast: {spell_result}")
+    try:
+        spell_result = arcane_warrior.cast_spell("Fireball",
+                                                 [fire_dragon, goblin_warrior])
+        print(f" Spell cast: {spell_result}")
 
-    mana_result = arcane_warrior.channel_mana(3)
-    print(f" Mana channel: {mana_result}")
+        mana_result = arcane_warrior.channel_mana(3)
+        print(f" Mana channel: {mana_result}")
+
+    except Exception as e:
+        color(red, f' ERROR! {e}')
 
     # ----------------------------------------------------------------------------
     #  End of demo
