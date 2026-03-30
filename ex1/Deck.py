@@ -7,8 +7,8 @@ Deck management system.
 import random
 from typing import Dict, Any, List
 
-from ex0.Card import Card
-from ex0.CreatureCard import CreatureCard
+from ex0 import Card
+from ex0 import CreatureCard
 from .SpellCard import SpellCard
 from .ArtifactCard import ArtifactCard
 
