@@ -13,6 +13,7 @@ Demonstration script.
 from ex0 import CreatureCard
 from .EliteCard import EliteCard
 
+
 # ----------------------------------------------------------------------------
 #  Visual helper functions
 # ----------------------------------------------------------------------------
@@ -26,6 +27,7 @@ def color(color: str, text: str) -> None:
 def div(to_write: str, how_many_times: int) -> None:
     """Prints a line divider."""
     print(" " + to_write * how_many_times)
+
 
 # ----------------------------------------------------------------------------
 #  Main function
@@ -55,7 +57,8 @@ def main() -> None:
     color(white, ' Playing Arcane Warrior (Elite Card):')
 
     try:
-        arcane_warrior = EliteCard('Arcane Warrior', 6, 'Legendary', 5, 10, 3, 8)
+        arcane_warrior = EliteCard('Arcane Warrior', 6, 'Legendary',
+                                   5, 10, 3, 8)
         fire_dragon = CreatureCard('Fire Dragon', 5, 'Legendary', 7, 5)
         goblin_warrior = CreatureCard('Goblin Warrior', 2, 'Common', 2, 1)
 

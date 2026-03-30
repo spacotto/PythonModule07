@@ -7,8 +7,6 @@ Abstract magic interface
 from abc import ABC, abstractmethod
 from typing import Dict, Any, List
 
-from ex0.Card import Card
-
 
 class Magical(ABC):
 
@@ -16,7 +14,8 @@ class Magical(ABC):
         pass
 
     @abstractmethod
-    def cast_spell(self, spell_name: str, targets: List[Any]) -> Dict[str, Any]:
+    def cast_spell(self, spell_name: str,
+                   targets: List[Any]) -> Dict[str, Any]:
         pass
 
     @abstractmethod

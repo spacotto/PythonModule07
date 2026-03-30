@@ -6,13 +6,24 @@ Multiple inheritance implementation
 
 from typing import Dict, Any, List
 from enum import Enum
-import random
 
 from ex0 import Card
 from ex1 import Spells
 from .Combatable import Combatable
 from .Magical import Magical
 
+
+# ----------------------------------------------------------------------------
+#  Elite Card Registry
+# ----------------------------------------------------------------------------
+
+class Elites(Enum):
+    pass
+
+
+# ----------------------------------------------------------------------------
+#  Elite Card
+# ----------------------------------------------------------------------------
 
 class EliteCard(Card, Combatable, Magical):
 
@@ -62,7 +73,8 @@ class EliteCard(Card, Combatable, Magical):
                 'health': self._health
         }
 
-    def cast_spell(self, spell_name: str, targets: List[Any]) -> Dict[str, Any]:
+    def cast_spell(self, spell_name: str,
+                   targets: List[Any]) -> Dict[str, Any]:
         """Cast a spell against a Creature or a Player"""
 
         # 1. Inspect the registry from ex1
@@ -98,4 +110,4 @@ class EliteCard(Card, Combatable, Magical):
         }
 
     def get_magic_stats(self) -> Dict[str, Any]:
-        return {'mana': self._mana_pool}
+        return {'mana': self._mana}
