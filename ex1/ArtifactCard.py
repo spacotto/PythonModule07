@@ -11,7 +11,7 @@ from ex0.Card import Card
 
 
 # ----------------------------------------------------------------------------
-#  Register of valid artifacts and their predefined attributes
+#  Artifacts Register
 # ----------------------------------------------------------------------------
 
 class Artifacts(Enum):
