@@ -12,7 +12,7 @@ from ex0.Card import Card
 
 
 # ----------------------------------------------------------------------------
-#  Register of valid spells and their predefined attributes
+#  Spells Register
 # ----------------------------------------------------------------------------
 
 class Spells(Enum):
