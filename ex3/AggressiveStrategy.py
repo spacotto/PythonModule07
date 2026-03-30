@@ -7,9 +7,10 @@ Concrete aggressive strategy
 from typing import Dict, Any, List
 
 from ex0 import Card
+from ex3 import GameStrategy
 
 
-class AggressiveStrategy():
+class AggressiveStrategy(GameStrategy):
     """
     Aggressive Strategy:
     - Prioritize attacking and dealing damage
@@ -19,14 +20,14 @@ class AggressiveStrategy():
     """
 
     def __init__(self) -> None:
-        pass
+        self._name: str = 'Aggressive'
 
     def execute_turn(self, hand: List[Card],
                      battlefield: List[Card]) -> Dict[str, Any]:
         pass
 
     def get_strategy_name(self) -> str:
-        pass
+        return self._name
 
     def prioritize_targets(self, available_targets: List[Any]) -> List[Any]:
         pass

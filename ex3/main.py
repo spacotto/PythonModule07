@@ -10,6 +10,8 @@ Demonstration script.
 #  Imports
 # ----------------------------------------------------------------------------
 
+from ex3 import FantasyCardFactory, AggressiveStrategy
+
 
 # ----------------------------------------------------------------------------
 #  Visual helper functions
@@ -46,9 +48,19 @@ def main() -> None:
 
     print()
     color(white, ' Configuring Fantasy Card Game...')
-    print(' Factory: FantasyCardFactory')
-    print(' Strategy: AggressiveStrategy')
-    print(' Available types:')
+
+    try:
+        fcf = FantasyCardFactory()
+        print(' Factory: FantasyCardFactory')
+
+        aggressive = AggressiveStrategy()
+        print(' Strategy: AggressiveStrategy')
+
+        available_types = fcf.get_supported_types()
+        print(f' Available types: {available_types}')
+
+    except Exception as e:
+        color(red, f' ERROR! {e}')
 
     # ----------------------------------------------------------------------------
     #  Simulating aggressive turn...
