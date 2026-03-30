@@ -33,7 +33,20 @@ class Artifacts(Enum):
                          "Permanent: +1 spell damage")
 
     @property
-    def a_name(self) -> str: return self.value[0]
+    def s_name(self) -> str: 
+        return self.value[0]
+    
+    @property
+    def s_cost(self) -> int: 
+        return self.value[1]
+    
+    @property
+    def s_rarity(self) -> str: 
+        return self.value[2]
+    
+    @property
+    def s_effect(self) -> str: 
+        return self.value[3]
 
 
 # ----------------------------------------------------------------------------
