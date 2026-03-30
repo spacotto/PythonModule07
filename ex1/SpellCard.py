@@ -26,19 +26,19 @@ class Spells(Enum):
     MAGIC_MISSILE = ("Magic Missile", 1, "Common", "damage")
 
     @property
-    def s_name(self) -> str: 
+    def s_name(self) -> str:
         return self.value[0]
-    
+
     @property
-    def s_cost(self) -> int: 
+    def s_cost(self) -> int:
         return self.value[1]
-    
+
     @property
-    def s_rarity(self) -> str: 
+    def s_rarity(self) -> str:
         return self.value[2]
-    
+
     @property
-    def s_effect(self) -> str: 
+    def s_effect(self) -> str:
         return self.value[3]
 
 
