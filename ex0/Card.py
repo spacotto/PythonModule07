@@ -6,32 +6,12 @@ The abstract foundation class.
 
 
 from abc import ABC, abstractmethod
-from enum import Enum
 from typing import Dict, Any, List
-
-
-class Rarity(Enum):
-    COMMON = 'Common'
-    UNCOMMON = 'Uncommon'
-    RARE = 'Rare'
-    LEGENDARY = 'Legendary'
-
 
 class Card(ABC):
     """The abstract foundation class."""
 
     def __init__(self, name: str, cost: int, rarity: str):
-
-        if not isinstance(name, str):
-            raise ValueError("Name must be a str")
-
-        if not isinstance(cost, int) or cost < 0:
-            raise ValueError("Cost must be a positive integer")
-
-        valid_rarities: List[str] = [r.value for r in Rarity]
-        if rarity not in valid_rarities:
-            raise ValueError(f"Rarity must be one of {valid_rarities}")
-
         self._name: str = name
         self._cost: int = cost
         self._rarity: str = rarity
