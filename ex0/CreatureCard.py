@@ -11,7 +11,7 @@ from .Card import Card
 
 
 # ----------------------------------------------------------------------------
-#  Register of valid creatures and their predefined attributes
+#  Creatures Register
 # ----------------------------------------------------------------------------
 
 class Creatures(Enum):
