@@ -7,7 +7,7 @@ Permanent game modifiers.
 from typing import Dict, Any
 from enum import Enum
 
-from ex0.Card import Card
+from ex0 import Card
 
 
 # ----------------------------------------------------------------------------
