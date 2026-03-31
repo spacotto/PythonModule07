@@ -2,7 +2,6 @@
 
 """
 Exercise 3: Game Engine
-
 Demonstration script.
 """
 
