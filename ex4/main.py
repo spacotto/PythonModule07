@@ -11,6 +11,7 @@ Demonstration script.
 
 from .TournamentPlatform import TournamentPlatform
 
+
 # ----------------------------------------------------------------------------
 #  Visual helper functions
 # ----------------------------------------------------------------------------
