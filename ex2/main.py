@@ -2,7 +2,6 @@
 
 """
 Exercise 2: Ability System
-
 Demonstration script.
 """
 
