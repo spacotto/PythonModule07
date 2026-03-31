@@ -40,8 +40,7 @@ class AggressiveStrategy(GameStrategy):
         mana_pool = 10
 
         # Determine the primary target with targeting logic
-        available_targets = ["Enemy Player"]
-        priority_targets = self.prioritize_targets(available_targets)
+        priority_targets = self.prioritize_targets(battlefield)
         primary_target = priority_targets[0]
 
         # Play cards until out of mana

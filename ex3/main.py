@@ -10,11 +10,11 @@ Demonstration script.
 #  Imports
 # ----------------------------------------------------------------------------
 
-from typing import List, Dict, Any
+from typing import List
 import random
 
 from ex0 import Card
-from ex3 import FantasyCardFactory, AggressiveStrategy
+from ex3 import FantasyCardFactory, AggressiveStrategy, GameEngine
 
 
 # ----------------------------------------------------------------------------
@@ -63,6 +63,9 @@ def main() -> None:
         available_types = fcf.get_supported_types()
         print(f' Available types: {available_types}')
 
+        hand: List[Card] = []
+        battlefield: List[Card] = ['Enemy Player']
+
     except Exception as e:
         color(red, f' ERROR! {e}')
 
@@ -76,14 +79,11 @@ def main() -> None:
     try:
 
         # Generate fantasy deck
-        x: int = random.randint(1, 30)
-        fantasy_theme: Dict[str, Any] = fcf.create_themed_deck(x)
+        fantasy_theme = fcf.create_themed_deck(random.randint(1, 30))
         fantasy_deck = fantasy_theme['deck']
 
         # Move cards from deck to hand
-        hand: List[Card] = []
-        y: int = random.randint(1, 10)
-        for _ in range(y):
+        for _ in range(random.randint(1, 10)):
             hand.append(fantasy_deck.draw_card())
 
         # Adjust to print format: "Name (Cost)"
@@ -104,7 +104,7 @@ def main() -> None:
     try:
         print(f" Strategy: {aggressive.get_strategy_name()}Strategy")
 
-        turn_actions = aggressive.execute_turn(hand, [])
+        turn_actions = aggressive.execute_turn(hand, battlefield)
         print(f" Actions: {turn_actions}")
 
     except Exception as e:
@@ -116,6 +116,19 @@ def main() -> None:
 
     print()
     color(white, ' Game report:')
+
+    try:
+        ge = GameEngine()
+        ge.configure_engine(fcf, aggressive)
+
+        turns_to_excute = 10
+        for _ in range(turns_to_excute):
+            ge.simulate_turn()
+
+        print(f' {ge.get_engine_status()}')
+
+    except Exception as e:
+        color(red, f' ERROR! {e}')
 
     # ----------------------------------------------------------------------------
     #  End of demo
