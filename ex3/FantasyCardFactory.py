@@ -10,7 +10,7 @@ from enum import Enum
 
 from ex0 import Card, Creatures, CreatureCard
 from ex1 import Deck, Spells, SpellCard, Artifacts, ArtifactCard
-from ex3 import CardFactory
+from ex3.CardFactory import CardFactory
 
 
 # ----------------------------------------------------------------------------

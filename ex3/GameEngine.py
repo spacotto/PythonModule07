@@ -9,7 +9,8 @@ from typing import Dict, Any, List
 import random
 
 from ex0 import Card
-from ex3 import CardFactory, GameStrategy
+from .CardFactory import CardFactory
+from .GameStrategy import GameStrategy
 
 
 class GameEngine():
@@ -28,7 +29,7 @@ class GameEngine():
         self._turns += 1
 
         hand: List[Card] = []
-        battlefield: List[Card] = ['Enemy Player']
+        battlefield: List[Any] = ['Enemy Player']
 
         # Generate deck
         fantasy_theme = self._facory.create_themed_deck(random.randint(1, 30))

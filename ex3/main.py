@@ -10,7 +10,7 @@ Demonstration script.
 #  Imports
 # ----------------------------------------------------------------------------
 
-from typing import List
+from typing import List, Any
 import random
 
 from ex0 import Card
@@ -64,7 +64,7 @@ def main() -> None:
         print(f' Available types: {available_types}')
 
         hand: List[Card] = []
-        battlefield: List[Card] = ['Enemy Player']
+        battlefield: List[Any] = ['Enemy Player']
 
     except Exception as e:
         color(red, f' ERROR! {e}')

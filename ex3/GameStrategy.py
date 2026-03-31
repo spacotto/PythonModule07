@@ -14,7 +14,7 @@ from ex0 import Card
 class GameStrategy(ABC):
 
     def __init__(self) -> None:
-        pass
+        self._name: str = 'Strategy'
 
     @abstractmethod
     def execute_turn(self, hand: List[Card],
