@@ -1,6 +1,5 @@
 """
 Exercise 0: Card Foundation
-
 Package initialization file.
 """
 
