@@ -10,6 +10,9 @@ Demonstration script.
 #  Imports
 # ----------------------------------------------------------------------------
 
+from typing import List, Dict, Any
+
+from ex0 import Card
 from ex3 import FantasyCardFactory, AggressiveStrategy
 
 
@@ -68,7 +71,25 @@ def main() -> None:
 
     print()
     color(white, ' Simulating aggressive turn...')
-    print(' Hand:')
+
+    try:
+
+        # Generate fantasy deck
+        fantasy_theme: Dict[str, Any] = fcf.create_themed_deck(10)
+        fantasy_deck = fantasy_theme['deck']
+
+        # Move cards from deck to hand
+        hand: List[Card] = []
+        for _ in range(3):
+            hand.append(fantasy_deck.draw_card())
+
+        # Adjust to print format: "Name (Cost)"
+        formatted_cards = [f"{card._name} ({card._cost})" for card in hand]
+        hand_display = ", ".join(formatted_cards)
+        print(f' Hand: [{hand_display}]')
+
+    except Exception as e:
+        color(red, f' ERROR! {e}')
 
     # ----------------------------------------------------------------------------
     #  Turn execution
@@ -76,8 +97,13 @@ def main() -> None:
 
     print()
     color(white, ' Turn execution:')
-    print(' Strategy: AggressiveStrategy')
-    print(' Actions:')
+
+    try:
+        print(' Strategy: AggressiveStrategy')
+        print(' Actions:')
+
+    except Exception as e:
+        color(red, f' ERROR! {e}')
 
     # ----------------------------------------------------------------------------
     #  Game report

@@ -5,11 +5,11 @@ Concrete factory implementation
 """
 
 import random
-from typing import Dict, Any
+from typing import Dict, Any, List
 from enum import Enum
 
 from ex0 import Card, Creatures, CreatureCard
-from ex1 import Spells, SpellCard, Artifacts, ArtifactCard
+from ex1 import Deck, Spells, SpellCard, Artifacts, ArtifactCard
 from ex3 import CardFactory
 
 
@@ -18,8 +18,8 @@ from ex3 import CardFactory
 # ----------------------------------------------------------------------------
 
 class CreaturesTypes(Enum):
-    DRAGON = 'dragon'
-    GOBLIN = 'goblin'
+    DRAGON = 'Dragon'
+    GOBLIN = 'Goblin'
 
     @property
     def _name(self) -> str:
@@ -27,7 +27,9 @@ class CreaturesTypes(Enum):
 
 
 class SpellTypes(Enum):
-    FIREBALL = 'fireball'
+    FIRE = 'Fire'
+    ICE = 'Ice'
+    LIGHTNING = 'Lightning'
 
     @property
     def _name(self) -> str:
@@ -35,7 +37,9 @@ class SpellTypes(Enum):
 
 
 class ArtifactsTypes(Enum):
-    MANA_RING = 'mana_ring'
+    RINGS = 'Ring'
+    STAFFS = 'Staff'
+    CRYSTALS = 'Crystal'
 
     @property
     def _name(self) -> str:
@@ -55,60 +59,74 @@ class FantasyCardFactory(CardFactory):
     """
 
     def __init__(self) -> None:
-        pass
+        """The sum of all the fantasy cards"""
+        self._fantasy_creatures: List[Any] = []
+        for creature in Creatures:
+            if self._is_fantasy_card(creature.c_name):
+                self._fantasy_creatures.append(creature)
+
+        self._fantasy_spells: List[Any] = []
+        for spell in Spells:
+            if self._is_fantasy_card(spell.s_name):
+                self._fantasy_spells.append(spell)
+
+        self._fantasy_artifacts: List[Any] = []
+        for artifact in Artifacts:
+            if self._is_fantasy_card(artifact.a_name):
+                self._fantasy_artifacts.append(artifact)
 
     def create_creature(self, name_or_power: str | int | None = None) -> Card:
         """Create fantasy-themed creatures (Dragons, Goblins, etc.)"""
 
-        for card in Creatures:
-            if isinstance(name_or_power, str):
-                if card.c_name == name_or_power:
-                    return CreatureCard(*card.value)
-            if isinstance(name_or_power, int):
-                if card.c_cost == name_or_power:
-                    return CreatureCard(*card.value)
+        if name_or_power is not None:
+            for c in self._fantasy_creatures:
+                if c.c_name == name_or_power or c.c_cost == name_or_power:
+                    return CreatureCard(*c.value)
 
-        card = random.choice(list(Creatures))
-        return CreatureCard(*card.value)
+        c = random.choice(self._fantasy_creatures)
+        return CreatureCard(*c.value)
 
     def create_spell(self, name_or_power: str | int | None = None) -> Card:
         """Creates elemental spells (Fire, Ice, Lightning)"""
 
-        for card in Spells:
-            if isinstance(name_or_power, str):
-                if card.s_name == name_or_power:
-                    return SpellCard(*card.value)
-            if isinstance(name_or_power, int):
-                if card.s_cost == name_or_power:
-                    return SpellCard(*card.value)
+        if name_or_power is not None:
+            for s in self._fantasy_spells:
+                if s.s_name == name_or_power or s.s_cost == name_or_power:
+                    return SpellCard(*s.value)
 
-        card = random.choice(list(Spells))
-        return SpellCard(*card.value)
+        s = random.choice(self._fantasy_spells)
+        return SpellCard(*s.value)
 
     def create_artifact(self, name_or_power: str | int | None = None) -> Card:
         """Creates magical artifacts (Rings, Staffs, Crystals)"""
 
-        for card in Artifacts:
-            if isinstance(name_or_power, str):
-                if card.a_name == name_or_power:
-                    return ArtifactCard(*card.value)
-            if isinstance(name_or_power, int):
-                if card.a_cost == name_or_power:
-                    return ArtifactCard(*card.value)
+        if name_or_power is not None:
+            for a in self._fantasy_artifacts:
+                if a.a_name == name_or_power or a.a_cost == name_or_power:
+                    return ArtifactCard(*a.value)
 
-        card = random.choice(list(Artifacts))
-        return ArtifactCard(*card.value)
+        a = random.choice(self._fantasy_artifacts)
+        return ArtifactCard(*a.value)
 
     def create_themed_deck(self, size: int) -> Dict[str, Any]:
-        deck = {}
-        themes: List[Enum] = [Creatures, Spells, Artifacts]
+        """Create a deck containing size fantasy cards"""
 
-        theme = random.choice(themes)
+        fantasy_deck = Deck()
+
         for _ in range(size):
-            if theme == Creatures:
-                v = self.create_creature()
-                k = card.c_name
-                deck.update({k: v})
+            card_type = random.choice(['creature', 'spell', 'artifact'])
+
+            if card_type == 'creature':
+                fantasy_deck.add_card(self.create_creature())
+            elif card_type == 'spell':
+                fantasy_deck.add_card(self.create_spell())
+            elif card_type == 'artifact':
+                fantasy_deck.add_card(self.create_artifact())
+
+        return {
+            'theme': 'Fantasy',
+            'deck': fantasy_deck
+        }
 
     def get_supported_types(self) -> Dict[str, Any]:
         return {
@@ -116,3 +134,22 @@ class FantasyCardFactory(CardFactory):
             'spells': [s._name for s in SpellTypes],
             'artifacts': [a._name for a in ArtifactsTypes]
         }
+
+    # ----------------------------------------------------------------------------
+    #  Helper function
+    # ----------------------------------------------------------------------------
+
+    def _is_fantasy_card(self, card_name: str) -> bool:
+        """Check if the card name matches the fantasy keywords."""
+
+        fantasy_keywords = (
+            [c._name for c in CreaturesTypes] +
+            [s._name for s in SpellTypes] +
+            [a._name for a in ArtifactsTypes]
+        )
+
+        for keyword in fantasy_keywords:
+            if keyword in card_name:
+                return True
+
+        return False
