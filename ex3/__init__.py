@@ -1,6 +1,5 @@
 """
 Exercise 3: Game Engine
-
 Package initialization file.
 """
 
