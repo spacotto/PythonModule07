@@ -5,14 +5,10 @@ Simple ranking interface.
 
 from abc import ABC, abstractmethod
 
-from ex2 import Combatable
-
-
 class Rankable(ABC):
 
-    def __init__(self, name: str, cost: int, rarity: str,
-                 attack: int, health: int, defense: int) -> None:
-        Combatable.__init__(self, name, cost, rarity, attack, health, defense)
+    def __init__(self, card_id: str) -> None:
+        self._card_id: str = card_id
         self._wins: int = 0
         self._losses: int = 0
 

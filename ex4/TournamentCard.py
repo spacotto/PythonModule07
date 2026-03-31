@@ -20,38 +20,40 @@ class TournamentCard(Card, Combatable, Rankable):
                  attack: int, health: int, defense: int,
                  card_id: str) -> None:
 
-        Combatable.__init__(self, name, cost, rarity, attack, health, defense)
-        self._wins: int = 0
-        self._losses: int = 0
-
-    # ----------------------------------------------------------------------------
-    #  Card
-    # ----------------------------------------------------------------------------
+        Card.__init__(self, name, cost, rarity)
+        Combatable.__init__(self, attack, health, defense)
+        Rankable.__init__(self, card_id)
 
     def play(self, game_state: dict) -> Dict[str, Any]:
         Card.play(self, game_state)
-
         return game_state
 
-    # ----------------------------------------------------------------------------
-    #  Combatable
-    # ----------------------------------------------------------------------------
-
-    def attack(self, target) -> Dict[str, Any]:
-        pass
+    # --- Combatable Interface ---
+    def attack(self, target: Any) -> Dict[str, Any]:
+        target_name = getattr(target, '_name', str(target))
+        return {
+            'attacker': self._name,
+            'target': target_name,
+            'damage': self._attack,
+            'combat_type': 'tournament_melee'
+        }
 
     def defend(self, incoming_damage: int) -> Dict[str, Any]:
-        pass
+        damage_taken = max(0, incoming_damage - self._defense)
+        self._health -= damage_taken
+        return {
+            'defender': self._name,
+            'damage_taken': damage_taken,
+            'still_alive': self._health > 0
+        }
 
     def get_combat_stats(self) -> Dict[str, Any]:
-        pass
+        return {'attack': self._attack, 'defense': self._defense, 'health': self._health}
 
-    # ----------------------------------------------------------------------------
-    #  Rankable
-    # ----------------------------------------------------------------------------
-
+    # --- Rankable Interface ---
     def calculate_rating(self) -> int:
-        pass
+        rating: int = 1000
+        return rating + (self._wins * 30) - (self._losses * 30)
 
     def update_wins(self, wins: int) -> None:
         self._wins += wins
@@ -60,11 +62,15 @@ class TournamentCard(Card, Combatable, Rankable):
         self._losses += losses
 
     def get_rank_info(self) -> Dict[str, Any]:
-        pass
-
-    # ----------------------------------------------------------------------------
-    #  TournamentCard
-    # ----------------------------------------------------------------------------
+        return {
+            'card_id': self._card_id,
+            'rating': self.calculate_rating(),
+            'wins': self._wins,
+            'losses': self._losses
+        }
 
     def get_tournament_stats(self) -> Dict[str, Any]:
-        pass
+        stats = self.get_card_info()
+        stats.update(self.get_combat_stats())
+        stats.update(self.get_rank_info())
+        return stats

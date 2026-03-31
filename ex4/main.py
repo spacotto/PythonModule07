@@ -10,6 +10,7 @@ Demonstration script.
 # ----------------------------------------------------------------------------
 
 from enum import Enum
+import random
 
 from .TournamentCard import TournamentCard
 from .TournamentPlatform import TournamentPlatform
@@ -20,9 +21,10 @@ from .TournamentPlatform import TournamentPlatform
 # ----------------------------------------------------------------------------
 
 class TournamentCards(Enum):
-    FIRE_DRAGON = ("Fire Dragon", 5, "Legendary", 7, 5, 'dragon_001')
-    GOBLIN_WARRIOR = ("Goblin Warrior", 2, "Common", 2, 1, 'goblin_001')
-    ICE_WIZARD = ("Ice Wizard", 4, "Rare", 3, 4, 'wizard_001')
+    """Tuple: (Name, Cost, Rarity, Attack, Health, Defense, Card ID)"""
+    FIRE_DRAGON = ("Fire Dragon", 5, "Legendary", 7, 5, 6, 'dragon_001')
+    GOBLIN_WARRIOR = ("Goblin Warrior", 2, "Common", 2, 1, 3, 'goblin_001')
+    ICE_WIZARD = ("Ice Wizard", 4, "Rare", 3, 4, 2, 'wizard_001')
 
 
 # ----------------------------------------------------------------------------
@@ -62,13 +64,20 @@ def main() -> None:
     color(white, ' Registering Tournament Cards...')
 
     try:
-        for _ in range(1):
+        tp = TournamentPlatform()
+
+        for _ in range(3):
+
+            random_enum = random.choice(list(TournamentCards))
+            card_data = random_enum.value
+            card = TournamentCard(*card_data)
+            tp.register_card(card)
+
             print()
-            c = TournamentCard()
-            print(f' {c._name} (ID: {c._card_id}):')
+            print(f' {card._name} (ID: {card._card_id}):')
             print(' - Interfaces: [Card, Combatable, Rankable]')
-            print(f' - Rating: 1200')
-            print(f' - Record: {c._wins}-{c._loss}')
+            print(f' - Rating: {card.calculate_rating()}')
+            print(f' - Record: {card._wins}-{card._losses}')
 
     except Exception as e:
         color(red, f' ERROR! {e}')
