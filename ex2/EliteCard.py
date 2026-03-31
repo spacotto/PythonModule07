@@ -4,21 +4,11 @@ Multiple inheritance implementation
 """
 
 from typing import Dict, Any, List
-from enum import Enum
 
 from ex0 import Card
 from ex1 import Spells
 from .Combatable import Combatable
 from .Magical import Magical
-
-
-# ----------------------------------------------------------------------------
-#  Elite Card Registry
-# ----------------------------------------------------------------------------
-
-class Elites(Enum):
-    pass
-
 
 # ----------------------------------------------------------------------------
 #  Elite Card
@@ -29,8 +19,9 @@ class EliteCard(Card, Combatable, Magical):
     def __init__(self, name: str, cost: int, rarity: str,
                  attack: int, health: int, defense: int,
                  mana: int) -> None:
-        Combatable.__init__(self, name, cost, rarity, attack, health, defense)
-        self._mana: int = mana
+        Card.__init__(self, name, cost, rarity)
+        Combatable.__init__(self, attack, health, defense)
+        Magical.__init__(self, mana)
 
     def play(self, game_state: Dict[str, Any]) -> Dict[str, Any]:
         Card.play(self, game_state)
