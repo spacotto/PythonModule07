@@ -1,6 +1,5 @@
 """
 Exercise 0: Card Foundation
-
 Your first concrete card type.
 """
 
