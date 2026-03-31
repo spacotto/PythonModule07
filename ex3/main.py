@@ -11,6 +11,7 @@ Demonstration script.
 # ----------------------------------------------------------------------------
 
 from typing import List, Dict, Any
+import random
 
 from ex0 import Card
 from ex3 import FantasyCardFactory, AggressiveStrategy
@@ -75,12 +76,14 @@ def main() -> None:
     try:
 
         # Generate fantasy deck
-        fantasy_theme: Dict[str, Any] = fcf.create_themed_deck(10)
+        x: int = random.randint(1, 30)
+        fantasy_theme: Dict[str, Any] = fcf.create_themed_deck(x)
         fantasy_deck = fantasy_theme['deck']
 
         # Move cards from deck to hand
         hand: List[Card] = []
-        for _ in range(3):
+        y: int = random.randint(1, 10)
+        for _ in range(y):
             hand.append(fantasy_deck.draw_card())
 
         # Adjust to print format: "Name (Cost)"
@@ -99,8 +102,10 @@ def main() -> None:
     color(white, ' Turn execution:')
 
     try:
-        print(' Strategy: AggressiveStrategy')
-        print(' Actions:')
+        print(f" Strategy: {aggressive.get_strategy_name()}Strategy")
+
+        turn_actions = aggressive.execute_turn(hand, [])
+        print(f" Actions: {turn_actions}")
 
     except Exception as e:
         color(red, f' ERROR! {e}')
