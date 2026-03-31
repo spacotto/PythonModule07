@@ -79,11 +79,11 @@ def main() -> None:
     try:
 
         # Generate fantasy deck
-        fantasy_theme = fcf.create_themed_deck(random.randint(1, 30))
+        fantasy_theme = fcf.create_themed_deck(30)
         fantasy_deck = fantasy_theme['deck']
 
         # Move cards from deck to hand
-        for _ in range(random.randint(1, 10)):
+        for _ in range(random.randint(3, 7)):
             hand.append(fantasy_deck.draw_card())
 
         # Adjust to print format: "Name (Cost)"

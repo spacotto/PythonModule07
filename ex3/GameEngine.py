@@ -32,17 +32,17 @@ class GameEngine():
         battlefield: List[Any] = ['Enemy Player']
 
         # Generate deck
-        fantasy_theme = self._facory.create_themed_deck(random.randint(1, 30))
+        fantasy_theme = self._facory.create_themed_deck(30)
         fantasy_deck = fantasy_theme['deck']
-        self._cards = len(fantasy_deck._cards)
+        self._cards += len(fantasy_deck._cards)
 
         # Move cards from deck to hand
-        for _ in range(random.randint(1, 10)):
+        for _ in range(random.randint(3, 7)):
             hand.append(fantasy_deck.draw_card())
 
         # Simulate turn
         turn = self._strategy.execute_turn(hand, battlefield)
-        self._dmg = turn['damage_dealt']
+        self._dmg += turn['damage_dealt']
 
         return turn
 
