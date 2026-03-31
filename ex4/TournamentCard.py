@@ -17,19 +17,18 @@ class TournamentCard(Card, Combatable, Rankable):
     """
 
     def __init__(self, name: str, cost: int, rarity: str,
-                 attack: int, health: int, defense: int) -> None:
+                 attack: int, health: int, defense: int,
+                 card_id: str) -> None:
 
-        Card.__init__(self, name, cost, rarity)
-
-        self._attack: int = attack
-        self._health: int = health
-        self._defense: int = defense
+        Combatable.__init__(self, name, cost, rarity, attack, health, defense)
+        self._wins: int = 0
+        self._losses: int = 0
 
     # ----------------------------------------------------------------------------
     #  Card
     # ----------------------------------------------------------------------------
 
-    def play(self, game_state: dict) -> dict:
+    def play(self, game_state: dict) -> Dict[str, Any]:
         Card.play(self, game_state)
 
         return game_state
@@ -38,7 +37,7 @@ class TournamentCard(Card, Combatable, Rankable):
     #  Combatable
     # ----------------------------------------------------------------------------
 
-    def attack(self, target) -> dict:
+    def attack(self, target) -> Dict[str, Any]:
         pass
 
     def defend(self, incoming_damage: int) -> Dict[str, Any]:
@@ -55,17 +54,17 @@ class TournamentCard(Card, Combatable, Rankable):
         pass
 
     def update_wins(self, wins: int) -> None:
-        pass
+        self._wins += wins
 
     def update_losses(self, losses: int) -> None:
-        pass
+        self._losses += losses
 
-    def get_rank_info(self) -> dict:
+    def get_rank_info(self) -> Dict[str, Any]:
         pass
 
     # ----------------------------------------------------------------------------
     #  TournamentCard
     # ----------------------------------------------------------------------------
 
-    def get_tournament_stats(self) -> dict:
+    def get_tournament_stats(self) -> Dict[str, Any]:
         pass

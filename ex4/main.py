@@ -9,7 +9,20 @@ Demonstration script.
 #  Imports
 # ----------------------------------------------------------------------------
 
+from enum import Enum
+
+from .TournamentCard import TournamentCard
 from .TournamentPlatform import TournamentPlatform
+
+
+# ----------------------------------------------------------------------------
+#  Tournament Cards
+# ----------------------------------------------------------------------------
+
+class TournamentCards(Enum):
+    FIRE_DRAGON = ("Fire Dragon", 5, "Legendary", 7, 5, 'dragon_001')
+    GOBLIN_WARRIOR = ("Goblin Warrior", 2, "Common", 2, 1, 'goblin_001')
+    ICE_WIZARD = ("Ice Wizard", 4, "Rare", 3, 4, 'wizard_001')
 
 
 # ----------------------------------------------------------------------------
@@ -50,10 +63,12 @@ def main() -> None:
 
     try:
         for _ in range(1):
-            print(' Fire Dragon (ID: dragon_001):')
+            print()
+            c = TournamentCard()
+            print(f' {c._name} (ID: {c._card_id}):')
             print(' - Interfaces: [Card, Combatable, Rankable]')
-            print(' - Rating: 1200')
-            print(' - Record: 0-0')
+            print(f' - Rating: 1200')
+            print(f' - Record: {c._wins}-{c._loss}')
 
     except Exception as e:
         color(red, f' ERROR! {e}')
