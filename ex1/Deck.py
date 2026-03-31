@@ -68,7 +68,6 @@ class Deck():
             self._artifacts.remove(card)
 
         # 3. Return card
-        print(f' Drew: {card._name}')
         return card
 
     def get_deck_stats(self) -> Dict[str, Any]:

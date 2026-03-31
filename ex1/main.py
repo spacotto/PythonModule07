@@ -80,20 +80,12 @@ def main() -> None:
 
         deck.shuffle()
 
-        print()
-        card = deck.draw_card()
-        game_state = card.play(game_state)
-        print(f' Play result: {game_state["play"]}')
-
-        print()
-        card = deck.draw_card()
-        game_state = card.play(game_state)
-        print(f' Play result: {game_state["play"]}')
-
-        print()
-        card = deck.draw_card()
-        game_state = card.play(game_state)
-        print(f' Play result: {game_state["play"]}')
+        for _ in range(3):
+            print()
+            card = deck.draw_card()
+            print(f' Drew: {card._name}')
+            game_state = card.play(game_state)
+            print(f' Play result: {game_state["play"]}')
 
     except Exception as e:
         color(red, f' ERROR! {e}')
