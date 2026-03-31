@@ -9,8 +9,8 @@ from typing import Dict, Any, List
 
 class Magical(ABC):
 
-    def __init__(self) -> None:
-        pass
+    def __init__(self, mana) -> None:
+        self._mana: int = mana
 
     @abstractmethod
     def cast_spell(self, spell_name: str,
