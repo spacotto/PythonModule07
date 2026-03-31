@@ -29,12 +29,7 @@ class EliteCard(Card, Combatable, Magical):
     def __init__(self, name: str, cost: int, rarity: str,
                  attack: int, health: int, defense: int,
                  mana: int) -> None:
-        Card.__init__(self, name, cost, rarity)
-
-        self._attack: int = attack
-        self._health: int = health
-        self._defense: int = defense
-
+        Combatable.__init__(self, name, cost, rarity)
         self._mana: int = mana
 
     def play(self, game_state: Dict[str, Any]) -> Dict[str, Any]:
