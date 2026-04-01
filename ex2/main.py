@@ -82,7 +82,7 @@ def main() -> None:
         attack_result = elite.attack(c1)
         print(f" Attack result: {attack_result}")
 
-        defense_result = elite.defend(5)
+        defense_result = elite.defend(random.randint(1, 10))
         print(f" Defense result: {defense_result}")
 
     except Exception as e:

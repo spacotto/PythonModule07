@@ -16,7 +16,7 @@ from .Magical import Magical
 # ----------------------------------------------------------------------------
 
 class Elites(Enum):
-    ARCANE_WARRIOR = ('Arcane Warrior', 6, 'Legendary', 2, 5, 10, 3)
+    ARCANE_WARRIOR = ('Arcane Warrior', 6, 'Legendary', 2, 5, 5, 8)
 
 
 # ----------------------------------------------------------------------------
