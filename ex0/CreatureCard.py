@@ -4,7 +4,9 @@ Your first concrete card type.
 """
 
 from typing import Dict, Any
+from enum import Enum
 from .Card import Card
+
 
 # ----------------------------------------------------------------------------
 #  Creatures

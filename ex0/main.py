@@ -10,8 +10,8 @@ Demonstration script.
 # ----------------------------------------------------------------------------
 
 import random
-from enum import Enum
-from ex0.CreatureCard import CreatureCard, Creatures
+from .CreatureCard import CreatureCard, Creatures
+
 
 # ----------------------------------------------------------------------------
 #  Visual helper functions
