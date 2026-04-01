@@ -100,7 +100,7 @@ def main() -> None:
     color(white, ' Turn execution:')
 
     try:
-        print(f" Strategy: {aggressive.get_strategy_name()}Strategy")
+        print(f" Strategy: {aggressive.get_strategy_name()}")
 
         turn_actions = aggressive.execute_turn(hand, battlefield)
         print(f" Actions: {turn_actions}")

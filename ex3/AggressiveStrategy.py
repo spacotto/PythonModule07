@@ -7,7 +7,7 @@ import random
 from typing import Dict, Any, List
 
 from ex0 import Card
-from ex3.GameStrategy import GameStrategy
+from .GameStrategy import GameStrategy
 
 
 class AggressiveStrategy(GameStrategy):
@@ -28,7 +28,7 @@ class AggressiveStrategy(GameStrategy):
         actions: Dict[str, Any] = {
             'cards_played': [],
             'mana_used': 0,
-            'targets_attacked': [],
+            'targets_attacked': ['Enemy Player'],
             'damage_dealt': 0
         }
 
@@ -75,7 +75,7 @@ class AggressiveStrategy(GameStrategy):
     def prioritize_targets(self, available_targets: List[Any]) -> List[Any]:
         """Always put the Enemy Player first in the sights."""
         targets = list(available_targets)
-        # Sort so that "Enemy Player" bubbles to the front of the list
+        # Sort so that "Enemy Player" is in the front of the list
         targets.sort(key=lambda t: 0
                      if getattr(t, '_name', str(t)) == "Enemy Player" else 1)
         return targets
