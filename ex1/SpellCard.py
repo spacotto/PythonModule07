@@ -25,6 +25,17 @@ class Spells(Enum):
 
 
 # ----------------------------------------------------------------------------
+#  Effect Types
+# ----------------------------------------------------------------------------
+
+class EffectTypes(Enum):
+    DAMAGE = 'damage'
+    HEAL = 'heal'
+    BUFF = 'buff'
+    DEBUF = 'debuf'
+
+
+# ----------------------------------------------------------------------------
 #  SpellCard
 # ----------------------------------------------------------------------------
 
@@ -33,23 +44,8 @@ class SpellCard(Card):
 
     def __init__(self, name: str, cost: int, rarity: str, effect_type: str):
 
-        # 1. Inspect the registry
-        valid_spell = None
-        for spell in Spells:
-            if spell.s_name == name:
-                valid_spell = spell.value
-                break
-
-        if not valid_spell:
-            raise ValueError(f"'{name}' is not a recognized spell.")
-
-        # 2. Pack the parameters
-        parameters: tuple = (name, cost, rarity, effect_type)
-        labels = ("Name", "Cost", "Rarity", "Effect Type")
-
-        for label, given, expected in zip(labels, parameters, valid_spell):
-            if given != expected:
-                raise ValueError(f"{label} should be {expected}, not {given}.")
+        if effect_type not in [e.value for e in EffectTypes]:
+            raise ValueError(f"Invalid effect type: {effect_type}")
 
         super().__init__(name, cost, rarity)
         self._type: str = 'Spell'

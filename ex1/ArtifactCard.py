@@ -30,6 +30,7 @@ class Artifacts(Enum):
     STAFF_OF_ELEMENTS = ("Staff of Elements", 6, "Legendary", 7,
                          "Permanent: +1 spell damage")
 
+
 # ----------------------------------------------------------------------------
 #  ArtifactCard
 # ----------------------------------------------------------------------------
@@ -40,26 +41,17 @@ class ArtifactCard(Card):
                  durability: int, effect: str):
         """Represent permanent game modifiers."""
 
-        # 1. Inspect registry
-        valid_artifact = None
-        for artifact in Artifacts:
-            if artifact.a_name == name:
-                valid_artifact = artifact.value
-                break
+        if not isinstance(durability, int):
+            raise TypeError('Durability must be an integer, '
+                            f'not {type(durability).__name__}')
+        if durability < 0:
+            raise ValueError('Durability cannot be negative, '
+                             f'not: {durability}')
 
-        if not valid_artifact:
-            raise ValueError(f"'{name}' is not a valid artifact.")
+        if not isinstance(effect, str):
+            raise TypeError('Effect must be a str, '
+                            f'not {type(effect).__name__}')
 
-        # 2. Pack the parameters
-        parameters: tuple = (name, cost, rarity, durability, effect)
-        labels: tuple = ("Name", "Cost", "Rarity", "Durability", "Effect")
-
-        # 3. Check if the attributes are valid
-        for label, given, expected in zip(labels, parameters, valid_artifact):
-            if given != expected:
-                raise ValueError(f"{label} should be {expected}, not {given}.")
-
-        # 4. If valid, init attributes
         super().__init__(name, cost, rarity)
         self._type: str = 'Artifact'
         self._durability = durability

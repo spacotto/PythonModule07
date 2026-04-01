@@ -7,7 +7,9 @@ Demonstration script.
 #  Imports
 # ----------------------------------------------------------------------------
 
-from ex0 import CreatureCard
+import random
+from typing import Any
+from ex0 import CreatureCard, Creatures
 from .SpellCard import SpellCard, Spells
 from .ArtifactCard import ArtifactCard, Artifacts
 from .Deck import Deck
@@ -47,8 +49,7 @@ def main() -> None:
     #  Mana: players' resource to play cards
     # ----------------------------------------------------------------------------
 
-    mana: int = 10
-    game_state: dict = {'mana': mana}
+    game_state: dict = {'mana': 30}
 
     # ----------------------------------------------------------------------------
     #  Build deck
@@ -58,11 +59,17 @@ def main() -> None:
 
     try:
         color(white, ' Building deck with different card types...')
+
         deck = Deck()
-        deck.add_card(CreatureCard('Fire Dragon', 5, 'Legendary', 7,  5))
-        deck.add_card(SpellCard("Lightning Bolt", 3, "Common", "damage"))
-        deck.add_card(ArtifactCard('Mana Crystal', 2, 'Common', 5,
-                                   'Permanent: +1 mana per turn'))
+
+        card: Any = random.choice(list(Creatures))
+        deck.add_card(CreatureCard(*card.value))
+
+        card = random.choice(list(Spells))
+        deck.add_card(SpellCard(*card.value))
+
+        card = random.choice(list(Artifacts))
+        deck.add_card(ArtifactCard(*card.value))
 
         print(f' Deck stats: {deck.get_deck_stats()}')
 
