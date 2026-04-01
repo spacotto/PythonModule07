@@ -56,8 +56,9 @@ class TournamentCard(Card, Combatable, Rankable):
 
     # --- Rankable Interface ---
     def calculate_rating(self) -> int:
-        self._rating += ((self._wins * 30) - (self._losses * 30))
-        return self._rating
+        rating = self._rating
+        result = rating + ((self._wins * 30) - (self._losses * 30))
+        return result
 
     def update_wins(self, wins: int) -> None:
         self._wins += wins
