@@ -58,8 +58,8 @@ def main() -> None:
 
         classes = [Card, Combatable, Magical]
         for m in classes:
-            methods = [method
-                    for method in dir(m) if method.startswith("_") is False]
+            methods = [method for method in dir(m)
+                       if method.startswith("_") is False]
             print(f" - {m.__name__}:", methods)
 
         card: Any = random.choice(list(Elites))
