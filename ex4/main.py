@@ -22,9 +22,12 @@ from .TournamentPlatform import TournamentPlatform
 
 class TournamentCards(Enum):
     """Tuple: (Name, Cost, Rarity, Attack, Health, Defense, Card ID)"""
-    FIRE_DRAGON = ("Fire Dragon", 5, "Legendary", 7, 5, 6, 'dragon_001')
-    GOBLIN_WARRIOR = ("Goblin Warrior", 2, "Common", 2, 1, 3, 'goblin_001')
-    ICE_WIZARD = ("Ice Wizard", 4, "Rare", 3, 4, 2, 'wizard_001')
+    FIRE_DRAGON = ("Fire Dragon", 5, "Legendary", 7, 5, 6,
+                   'dragon_001', 1200)
+    GOBLIN_WARRIOR = ("Goblin Warrior", 2, "Common", 2, 1, 3,
+                      'goblin_001', 1300)
+    ICE_WIZARD = ("Ice Wizard", 4, "Rare", 3, 4, 2,
+                  'wizard_001', 1150)
 
 
 # ----------------------------------------------------------------------------

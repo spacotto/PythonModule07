@@ -8,8 +8,9 @@ from abc import ABC, abstractmethod
 
 class Rankable(ABC):
 
-    def __init__(self, card_id: str) -> None:
+    def __init__(self, card_id: str, rating: int) -> None:
         self._card_id: str = card_id
+        self._rating: int = rating
         self._wins: int = 0
         self._losses: int = 0
 

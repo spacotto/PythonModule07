@@ -7,7 +7,7 @@ from typing import Dict, Any
 
 from ex0 import Card
 from ex2 import Combatable
-from ex4.Rankable import Rankable
+from .Rankable import Rankable
 
 
 class TournamentCard(Card, Combatable, Rankable):
@@ -18,11 +18,11 @@ class TournamentCard(Card, Combatable, Rankable):
 
     def __init__(self, name: str, cost: int, rarity: str,
                  attack: int, health: int, defense: int,
-                 card_id: str) -> None:
+                 card_id: str, rating: int) -> None:
 
         Card.__init__(self, name, cost, rarity)
         Combatable.__init__(self, attack, health, defense)
-        Rankable.__init__(self, card_id)
+        Rankable.__init__(self, card_id, rating)
 
     def play(self, game_state: dict) -> Dict[str, Any]:
         Card.play(self, game_state)
@@ -56,8 +56,8 @@ class TournamentCard(Card, Combatable, Rankable):
 
     # --- Rankable Interface ---
     def calculate_rating(self) -> int:
-        rating: int = 1000
-        return rating + (self._wins * 30) - (self._losses * 30)
+        self._rating += ((self._wins * 30) - (self._losses * 30))
+        return self._rating
 
     def update_wins(self, wins: int) -> None:
         self._wins += wins

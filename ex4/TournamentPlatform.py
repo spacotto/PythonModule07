@@ -10,7 +10,6 @@ from .TournamentCard import TournamentCard
 class TournamentPlatform():
 
     def __init__(self) -> None:
-        # Store the actual objects, not just a count
         self._registry: Dict[str, TournamentCard] = {}
         self._matches: int = 0
         self._status: str = 'active'
@@ -28,7 +27,6 @@ class TournamentPlatform():
 
         self._matches += 1
 
-        # Determine winner by simple attack power comparison
         if c1._attack > c2._attack:
             c1.update_wins(1)
             c2.update_losses(1)
@@ -39,8 +37,8 @@ class TournamentPlatform():
             winner, loser = c2, c1
 
         return {
-            'winner': winner._name,
-            'loser': loser._name,
+            'winner': winner._card_id,
+            'loser': loser._card_id,
             'winner_new_rating': winner.calculate_rating(),
             'loser_rating': loser.calculate_rating()
         }
