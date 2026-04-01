@@ -53,13 +53,15 @@ def main() -> None:
 
     print()
     color(white, ' EliteCard capabilities:')
-    classes = [Card, Combatable, Magical]
-    for x in classes:
-        methods = [method
-                   for method in dir(x) if method.startswith("_") is False]
-        print(f"- {x.__name__}:", methods)
 
     try:
+
+        classes = [Card, Combatable, Magical]
+        for m in classes:
+            methods = [method
+                    for method in dir(m) if method.startswith("_") is False]
+            print(f" - {m.__name__}:", methods)
+
         card: Any = random.choice(list(Elites))
         elite = EliteCard(*card.value)
 
