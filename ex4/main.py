@@ -107,7 +107,8 @@ def main() -> None:
     try:
         leaderboard = tp.get_leaderboard()
         for idx, entry in enumerate(leaderboard, start=1):
-            print(f" {idx}. {entry['name']} - Rating: {entry['rating']} ({entry['record']})")
+            print(f" {idx}. {entry['name']} -"
+                  f"  Rating: {entry['rating']} ({entry['record']})")
 
     except Exception as e:
         color(red, f' ERROR! {e}')

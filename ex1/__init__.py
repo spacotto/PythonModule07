@@ -9,4 +9,5 @@ from ex1.ArtifactCard import ArtifactCard, Artifacts
 from ex1.Deck import Deck
 
 
-__all__ = ['SpellCard', 'Spells', 'EffectTypes', 'ArtifactCard', 'Artifacts', 'Deck']
+__all__ = ['SpellCard', 'Spells', 'EffectTypes',
+           'ArtifactCard', 'Artifacts', 'Deck']

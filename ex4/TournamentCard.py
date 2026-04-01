@@ -48,7 +48,11 @@ class TournamentCard(Card, Combatable, Rankable):
         }
 
     def get_combat_stats(self) -> Dict[str, Any]:
-        return {'attack': self._attack, 'defense': self._defense, 'health': self._health}
+        return {
+            'attack': self._attack,
+            'defense': self._defense,
+            'health': self._health
+        }
 
     # --- Rankable Interface ---
     def calculate_rating(self) -> int:

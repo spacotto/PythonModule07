@@ -3,8 +3,9 @@ Exercise 4: Tournament Platform
 Platform management system
 """
 
-from typing import List, Dict, Any
+from typing import Dict
 from .TournamentCard import TournamentCard
+
 
 class TournamentPlatform():
 

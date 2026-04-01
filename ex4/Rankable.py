@@ -5,6 +5,7 @@ Simple ranking interface.
 
 from abc import ABC, abstractmethod
 
+
 class Rankable(ABC):
 
     def __init__(self, card_id: str) -> None:
