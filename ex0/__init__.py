@@ -4,6 +4,6 @@ Package initialization file.
 """
 
 from ex0.Card import Card
-from ex0.CreatureCard import CreatureCard
+from ex0.CreatureCard import CreatureCard, Creatures
 
 __all__ = ['Card', 'CreatureCard']
