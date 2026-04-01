@@ -8,47 +8,9 @@ Demonstration script.
 # ----------------------------------------------------------------------------
 
 from ex0 import CreatureCard
-from .SpellCard import SpellCard
-from .ArtifactCard import ArtifactCard
+from .SpellCard import SpellCard, Spells
+from .ArtifactCard import ArtifactCard, Artifacts
 from .Deck import Deck
-
-
-# ----------------------------------------------------------------------------
-#  Spells
-# ----------------------------------------------------------------------------
-
-class Spells(Enum):
-    LIGHTNING_BOLT = ("Lightning Bolt", 3, "Common", "damage")
-    HEALING_POTION = ("Healing Potion", 2, "Common", "heal")
-    FIREBALL = ("Fireball", 4, "Uncommon", "damage")
-    SHIELD_SPELL = ("Shield Spell", 1, "Common", "buff")
-    METEOR = ("Meteor", 8, "Legendary", "damage")
-    ICE_SHARD = ("Ice Shard", 2, "Common", "damage")
-    DIVINE_LIGHT = ("Divine Light", 5, "Rare", "heal")
-    MAGIC_MISSILE = ("Magic Missile", 1, "Common", "damage")
-
-
-# ----------------------------------------------------------------------------
-#  Artifacts
-# ----------------------------------------------------------------------------
-
-class Artifacts(Enum):
-    MANA_CRYSTAL = ("Mana Crystal", 2, "Common", 5,
-                    "Permanent: +1 mana per turn")
-    SWORD_OF_POWER = ("Sword of Power", 3, "Uncommon", 3,
-                      "Permanent: +2 attack to equipped creature")
-    RING_OF_WISDOM = ("Ring of Wisdom", 4, "Rare", 4,
-                      "Permanent: Draw an extra card each turn")
-    SHIELD_OF_DEFENSE = ("Shield of Defense", 5, "Rare", 6,
-                         "Permanent: +3 health to all friendly creatures")
-    CROWN_OF_KINGS = ("Crown of Kings", 7, "Legendary", 8,
-                      "Permanent: +1 cost reduction to all cards")
-    BOOTS_OF_SPEED = ("Boots of Speed", 2, "Uncommon", 2,
-                      "Permanent: Cards cost 1 less mana")
-    CLOAK_OF_SHADOWS = ("Cloak of Shadows", 3, "Uncommon", 3,
-                        "Permanent: Creatures have stealth")
-    STAFF_OF_ELEMENTS = ("Staff of Elements", 6, "Legendary", 7,
-                         "Permanent: +1 spell damage")
 
 
 # ----------------------------------------------------------------------------
