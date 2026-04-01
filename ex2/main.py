@@ -11,8 +11,10 @@ Demonstration script.
 
 import random
 from typing import Any
-from ex0 import CreatureCard, Creatures
+from ex0 import CreatureCard, Creatures, Card
 from ex1 import Spells
+from .Combatable import Combatable
+from .Magical import Magical
 from .EliteCard import EliteCard, Elites
 
 
@@ -51,9 +53,11 @@ def main() -> None:
 
     print()
     color(white, ' EliteCard capabilities:')
-    print(" - Card: ['play', 'get_card_info', 'is_playable']")
-    print(" - Combatable: ['attack', 'defend', 'get_combat_stats']")
-    print(" - Magical: ['cast_spell', 'channel_mana', 'get_magic_stats']")
+    classes = [Card, Combatable, Magical]
+    for x in classes:
+        methods = [method
+                   for method in dir(x) if method.startswith("_") is False]
+        print(f"- {x.__name__}:", methods)
 
     try:
         card: Any = random.choice(list(Elites))

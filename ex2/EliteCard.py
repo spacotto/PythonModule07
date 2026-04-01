@@ -83,7 +83,7 @@ class EliteCard(Card, Combatable, Magical):
         # Now you can safely access the attribute from the object
         mana_cost = spell._cost
 
-        # Mana Validation (Better Parsing)
+        # Mana Validation
         if self._mana < mana_cost:
             raise ValueError(f"Insufficient mana to cast {spell._name}. "
                              f"Required: {mana_cost}, Available: {self._mana}")

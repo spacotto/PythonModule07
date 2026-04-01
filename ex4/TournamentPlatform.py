@@ -39,7 +39,7 @@ class TournamentPlatform():
         return {
             'winner': winner._card_id,
             'loser': loser._card_id,
-            'winner_new_rating': winner.calculate_rating(),
+            'winner_rating': winner.calculate_rating(),
             'loser_rating': loser.calculate_rating()
         }
 
