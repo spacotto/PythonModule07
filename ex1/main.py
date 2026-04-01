@@ -14,7 +14,22 @@ from .Deck import Deck
 
 
 # ----------------------------------------------------------------------------
-#  Artifacts Register
+#  Spells
+# ----------------------------------------------------------------------------
+
+class Spells(Enum):
+    LIGHTNING_BOLT = ("Lightning Bolt", 3, "Common", "damage")
+    HEALING_POTION = ("Healing Potion", 2, "Common", "heal")
+    FIREBALL = ("Fireball", 4, "Uncommon", "damage")
+    SHIELD_SPELL = ("Shield Spell", 1, "Common", "buff")
+    METEOR = ("Meteor", 8, "Legendary", "damage")
+    ICE_SHARD = ("Ice Shard", 2, "Common", "damage")
+    DIVINE_LIGHT = ("Divine Light", 5, "Rare", "heal")
+    MAGIC_MISSILE = ("Magic Missile", 1, "Common", "damage")
+
+
+# ----------------------------------------------------------------------------
+#  Artifacts
 # ----------------------------------------------------------------------------
 
 class Artifacts(Enum):
