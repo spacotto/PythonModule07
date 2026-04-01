@@ -4,11 +4,20 @@ Multiple inheritance implementation
 """
 
 from typing import Dict, Any, List
-
+from enum import Enum
 from ex0 import Card
-from ex1 import Spells
+from ex1 import SpellCard, Spells
 from .Combatable import Combatable
 from .Magical import Magical
+
+
+# ----------------------------------------------------------------------------
+#  Elite Cards
+# ----------------------------------------------------------------------------
+
+class Elites(Enum):
+    ARCANE_WARRIOR = ('Arcane Warrior', 6, 'Legendary', 2, 5, 10, 3)
+
 
 # ----------------------------------------------------------------------------
 #  Elite Card
@@ -62,29 +71,32 @@ class EliteCard(Card, Combatable, Magical):
                    targets: List[Any]) -> Dict[str, Any]:
         """Cast a spell against a Creature or a Player"""
 
-        # 1. Inspect the registry from ex1
-        spell_record = None
-        for spell in Spells:
-            if spell.s_name == spell_name:
-                spell_record = spell
-                break
+        # Lookup by Member Name
+        try:
+            spell_member = Spells[spell_name]
+        except KeyError:
+            raise ValueError(f"'{spell_name}' is not in Spells.")
 
-        if not spell_record:
-            raise ValueError(f"'{spell_name}' is not a spell.")
+        # Init the SpellCard object using the tuple data
+        spell = SpellCard(*spell_member.value)
 
-        # 2. Extract the cost
-        mana_cost = spell_record.s_cost
+        # Now you can safely access the attribute from the object
+        mana_cost = spell._cost
+
+        # Mana Validation (Better Parsing)
+        if self._mana < mana_cost:
+            raise ValueError(f"Insufficient mana to cast {spell._name}. "
+                             f"Required: {mana_cost}, Available: {self._mana}")
+
         self._mana -= mana_cost
 
-        # 3. Secure the target
+        # Log info
         target_names = [getattr(t, '_name', str(t)) for t in targets]
-
-        # 4. Log the action result
         return {
             'caster': self._name,
-            'spell': spell_name,
+            'spell': spell._name,
             'targets': target_names,
-            'mana_used': mana_cost
+            'mana_used': mana_cost,
         }
 
     def channel_mana(self, amount: int) -> Dict[str, Any]:

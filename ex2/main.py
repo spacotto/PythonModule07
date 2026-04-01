@@ -9,8 +9,11 @@ Demonstration script.
 #  Imports
 # ----------------------------------------------------------------------------
 
-from ex0 import CreatureCard
-from .EliteCard import EliteCard
+import random
+from typing import Any
+from ex0 import CreatureCard, Creatures
+from ex1 import Spells
+from .EliteCard import EliteCard, Elites
 
 
 # ----------------------------------------------------------------------------
@@ -52,14 +55,18 @@ def main() -> None:
     print(" - Combatable: ['attack', 'defend', 'get_combat_stats']")
     print(" - Magical: ['cast_spell', 'channel_mana', 'get_magic_stats']")
 
-    print()
-    color(white, ' Playing Arcane Warrior (Elite Card):')
-
     try:
-        arcane_warrior = EliteCard('Arcane Warrior', 6, 'Legendary',
-                                   5, 10, 3, 8)
-        fire_dragon = CreatureCard('Fire Dragon', 5, 'Legendary', 7, 5)
-        goblin_warrior = CreatureCard('Goblin Warrior', 2, 'Common', 2, 1)
+        card: Any = random.choice(list(Elites))
+        elite = EliteCard(*card.value)
+
+        card = random.choice(list(Creatures))
+        c1 = CreatureCard(*card.value)
+
+        card = random.choice(list(Creatures))
+        c2 = CreatureCard(*card.value)
+
+        print()
+        color(white, f' Playing {elite._name} (Elite Card):')
 
     except Exception as e:
         color(red, f' ERROR! {e}')
@@ -68,14 +75,14 @@ def main() -> None:
     #  Combat phase
     # ----------------------------------------------------------------------------
 
-        print()
-        color(white, ' Combat phase:')
+    print()
+    color(white, ' Combat phase:')
 
     try:
-        attack_result = arcane_warrior.attack(fire_dragon)
+        attack_result = elite.attack(c1)
         print(f" Attack result: {attack_result}")
 
-        defense_result = arcane_warrior.defend(5)
+        defense_result = elite.defend(5)
         print(f" Defense result: {defense_result}")
 
     except Exception as e:
@@ -85,15 +92,16 @@ def main() -> None:
     #  Magical phase
     # ----------------------------------------------------------------------------
 
-        print()
-        color(white, ' Magic phase:')
+    print()
+    color(white, ' Magic phase:')
 
     try:
-        spell_result = arcane_warrior.cast_spell("Fireball",
-                                                 [fire_dragon, goblin_warrior])
+        random_enum = random.choice(list(Spells))
+        member_name = str(random_enum.name)
+        spell_result = elite.cast_spell(member_name, [c1, c2])
         print(f" Spell cast: {spell_result}")
 
-        mana_result = arcane_warrior.channel_mana(3)
+        mana_result = elite.channel_mana(3)
         print(f" Mana channel: {mana_result}")
 
     except Exception as e:

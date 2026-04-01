@@ -6,8 +6,6 @@ Abstract combat interface
 from abc import ABC, abstractmethod
 from typing import Dict, Any
 
-from ex0 import Card
-
 
 class Combatable(ABC):
 
