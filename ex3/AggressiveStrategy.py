@@ -20,7 +20,7 @@ class AggressiveStrategy(GameStrategy):
     """
 
     def __init__(self) -> None:
-        self._name: str = 'Aggressive'
+        self._name: str = 'AggressiveStrategy'
 
     def execute_turn(self, hand: List[Card],
                      battlefield: List[Card]) -> Dict[str, Any]:
