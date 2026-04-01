@@ -6,6 +6,20 @@ Your first concrete card type.
 from typing import Dict, Any
 from .Card import Card
 
+# ----------------------------------------------------------------------------
+#  Creatures
+# ----------------------------------------------------------------------------
+
+class Creatures(Enum):
+    FIRE_DRAGON = ("Fire Dragon", 5, "Legendary", 7, 5)
+    GOBLIN_WARRIOR = ("Goblin Warrior", 2, "Common", 2, 1)
+    ICE_WIZARD = ("Ice Wizard", 4, "Rare", 3, 4)
+    LIGHTNING_ELEMENTAL = ("Lightning Elemental", 3, "Uncommon", 4, 2)
+    STONE_GOLEM = ("Stone Golem", 6, "Rare", 5, 8)
+    SHADOW_ASSASSIN = ("Shadow Assassin", 3, "Uncommon", 5, 2)
+    HEALING_ANGEL = ("Healing Angel", 4, "Rare", 2, 6)
+    FOREST_SPRITE = ("Forest Sprite", 1, "Common", 1, 1)
+
 
 # ----------------------------------------------------------------------------
 #  CreatureCard
