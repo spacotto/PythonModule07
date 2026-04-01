@@ -9,7 +9,11 @@ Demonstration script.
 #  Imports
 # ----------------------------------------------------------------------------
 
+from enum import Enum
+import random
+
 from ex0.CreatureCard import CreatureCard
+
 
 # ----------------------------------------------------------------------------
 #  Creatures
@@ -24,6 +28,7 @@ class Creatures(Enum):
     SHADOW_ASSASSIN = ("Shadow Assassin", 3, "Uncommon", 5, 2)
     HEALING_ANGEL = ("Healing Angel", 4, "Rare", 2, 6)
     FOREST_SPRITE = ("Forest Sprite", 1, "Common", 1, 1)
+
 
 # ----------------------------------------------------------------------------
 #  Visual helper functions
@@ -63,19 +68,24 @@ def main() -> None:
     #  Mana: players' resource to play cards
     # ----------------------------------------------------------------------------
 
-    mana: int = 8
-    game_state: dict = {'mana': mana}
+    game_state: dict = {'mana': 6}
+
+    # Choose 2 random tuple of data to init cards
+    cards = random.sample(list(Creatures), 2)
+    enum1, enum2 = cards[0], cards[1]
 
     # ----------------------------------------------------------------------------
     #  Get info of a card
     # ----------------------------------------------------------------------------
 
     print()
+    color(white, ' CreatureCard Info:')
+
     try:
-        color(white, ' CreatureCard Info:')
-        fire_dragon = CreatureCard('Fire Dragon', 5, 'Legendary', 7, 5)
-        card_info = fire_dragon.get_card_info()
+        c1 = CreatureCard(*enum1.value)
+        card_info = c1.get_card_info()
         print(f' {card_info}')
+
     except Exception as e:
         color(red, f' ERROR! {e}')
 
@@ -85,13 +95,12 @@ def main() -> None:
 
     print()
     try:
-        card = fire_dragon._name
         mana = game_state['mana']
-        print(f' Playing {card} with {mana} mana available:')
+        print(f' Playing {c1._name} with {mana} mana available:')
 
-        print(f' Playable: {fire_dragon.is_playable(mana)}')
+        print(f' Playable: {c1.is_playable(mana)}')
 
-        game_state = fire_dragon.play(game_state)
+        game_state = c1.play(game_state)
         print(f' Play result: {game_state["play"]}')
 
     except Exception as e:
@@ -103,8 +112,8 @@ def main() -> None:
 
     print()
     try:
-        goblin_warrior = CreatureCard('Goblin Warrior', 2, 'Common', 2, 1)
-        print(f' Attack result: {fire_dragon.attack_target(goblin_warrior)}')
+        c2 = CreatureCard(*enum2.value)
+        print(f' Attack result: {c1.attack_target(c2)}')
 
     except Exception as e:
         color(red, f' ERROR! {e}')
@@ -115,9 +124,10 @@ def main() -> None:
 
     print()
     try:
+        game_state.update({'mana': 1})
         mana = game_state['mana']
         color(white, f' Testing insufficient mana ({mana} available):')
-        print(f' Playable: {fire_dragon.is_playable(mana)}')
+        print(f' Playable: {c1.is_playable(mana)}')
 
     except Exception as e:
         color(red, f' ERROR! {e}')

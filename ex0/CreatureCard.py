@@ -4,10 +4,7 @@ Your first concrete card type.
 """
 
 from typing import Dict, Any
-from enum import Enum
-
 from .Card import Card
-
 
 
 # ----------------------------------------------------------------------------
@@ -15,12 +12,26 @@ from .Card import Card
 # ----------------------------------------------------------------------------
 
 class CreatureCard(Card):
-    """Your first concrete card type."""
 
     def __init__(self, name: str, cost: int, rarity: str,
                  attack: int, health: int):
 
+        if not isinstance(attack, int):
+            raise TypeError('Attack must be an integer, '
+                            f'not {type(attack).__name__}')
+        if attack < 0:
+            raise ValueError('Creature attack cannot be negative, '
+                             f'not: {attack}')
+
+        if not isinstance(health, int):
+            raise TypeError('Health must be an integer, '
+                            f'not {type(health).__name__}')
+        if health <= 0:
+            raise ValueError(' Creature health must be greater than 0. '
+                             f'Got: {health}')
+
         super().__init__(name, cost, rarity)
+
         self._type: str = 'Creature'
         self._attack: int = attack
         self._health: int = health
