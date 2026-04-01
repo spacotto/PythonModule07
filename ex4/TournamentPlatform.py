@@ -23,7 +23,7 @@ class TournamentPlatform():
         c2 = self._registry.get(card2_id)
 
         if not c1 or not c2:
-            raise ValueError("Avast! One of those cards ain't registered in the fleet.")
+            raise ValueError("No such card in registry.")
 
         self._matches += 1
 
@@ -38,15 +38,16 @@ class TournamentPlatform():
             winner, loser = c2, c1
 
         return {
-            'match_id': self._matches,
             'winner': winner._name,
             'loser': loser._name,
-            'winner_new_rating': winner.calculate_rating()
+            'winner_new_rating': winner.calculate_rating(),
+            'loser_rating': loser.calculate_rating()
         }
 
     def get_leaderboard(self) -> list:
-        # Sort the deck by highest rating first
-        sorted_cards = sorted(self._registry.values(), key=lambda x: x.calculate_rating(), reverse=True)
+        sorted_cards = sorted(self._registry.values(),
+                              key=lambda x: x.calculate_rating(),
+                              reverse=True)
         return [
             {
                 'name': card._name,

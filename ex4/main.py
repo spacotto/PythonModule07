@@ -66,18 +66,18 @@ def main() -> None:
     try:
         tp = TournamentPlatform()
 
-        for _ in range(3):
+        # Use random.sample to grab 2 UNIQUE cards so the IDs never collide
+        chosen_cards = random.sample(list(TournamentCards), 2)
 
-            random_enum = random.choice(list(TournamentCards))
-            card_data = random_enum.value
-            card = TournamentCard(*card_data)
-            tp.register_card(card)
+        for card in chosen_cards:
+            c = TournamentCard(*card.value)
+            tp.register_card(c)
 
             print()
-            print(f' {card._name} (ID: {card._card_id}):')
+            print(f' {c._name} (ID: {c._card_id}):')
             print(' - Interfaces: [Card, Combatable, Rankable]')
-            print(f' - Rating: {card.calculate_rating()}')
-            print(f' - Record: {card._wins}-{card._losses}')
+            print(f' - Rating: {c.calculate_rating()}')
+            print(f' - Record: {c._wins}-{c._losses}')
 
     except Exception as e:
         color(red, f' ERROR! {e}')
@@ -89,12 +89,28 @@ def main() -> None:
     print()
     color(white, ' Creating tournament match...')
 
+    try:
+        card_id = list(tp._registry.keys())
+        match_result = tp.create_match(card_id[0], card_id[1])
+        print(f" Match result: {match_result}")
+
+    except Exception as e:
+        color(red, f' ERROR! {e}')
+
     # ----------------------------------------------------------------------------
     #  Tournament Leaderboard
     # ----------------------------------------------------------------------------
 
     print()
     color(white, ' Tournament Leaderboard:')
+
+    try:
+        leaderboard = tp.get_leaderboard()
+        for idx, entry in enumerate(leaderboard, start=1):
+            print(f" {idx}. {entry['name']} - Rating: {entry['rating']} ({entry['record']})")
+
+    except Exception as e:
+        color(red, f' ERROR! {e}')
 
     # ----------------------------------------------------------------------------
     #  Platform Report
@@ -104,7 +120,6 @@ def main() -> None:
     color(white, ' Platform Report:')
 
     try:
-        tp = TournamentPlatform()
         print(f' {tp.generate_tournament_report()}')
 
     except Exception as e:
