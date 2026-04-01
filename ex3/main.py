@@ -9,9 +9,8 @@ Demonstration script.
 #  Imports
 # ----------------------------------------------------------------------------
 
-from typing import List, Any
 import random
-
+from typing import List, Any
 from ex0 import Card
 from ex3 import FantasyCardFactory, AggressiveStrategy, GameEngine
 

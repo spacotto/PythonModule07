@@ -4,12 +4,12 @@ Concrete factory implementation
 """
 
 import random
-from typing import Dict, Any, List
+from typing import Dict, Any
 from enum import Enum
 
-from ex0 import Card, Creatures, CreatureCard
-from ex1 import Deck, Spells, SpellCard, Artifacts, ArtifactCard
-from ex3.CardFactory import CardFactory
+from ex0 import Card, CreatureCard, Rarity
+from ex1 import Deck, SpellCard, EffectTypes, ArtifactCard
+from .CardFactory import CardFactory
 
 
 # ----------------------------------------------------------------------------
@@ -17,32 +17,50 @@ from ex3.CardFactory import CardFactory
 # ----------------------------------------------------------------------------
 
 class CreaturesTypes(Enum):
-    DRAGON = 'Dragon'
-    GOBLIN = 'Goblin'
-
-    @property
-    def _name(self) -> str:
-        return self.value
+    DRAGON = 'dragon'
+    GOBLIN = 'goblin'
 
 
 class SpellTypes(Enum):
-    FIRE = 'Fire'
-    ICE = 'Ice'
-    LIGHTNING = 'Lightning'
-
-    @property
-    def _name(self) -> str:
-        return self.value
+    FIRE = 'fire'
+    ICE = 'ice'
+    LIGHTNING = 'lightning'
 
 
 class ArtifactsTypes(Enum):
-    RINGS = 'Ring'
-    STAFFS = 'Staff'
-    CRYSTALS = 'Crystal'
+    RINGS = 'ring'
+    STAFFS = 'staff'
+    CRYSTALS = 'crystal'
 
-    @property
-    def _name(self) -> str:
-        return self.value
+
+# ----------------------------------------------------------------------------
+#  Fantasy Cards
+# ----------------------------------------------------------------------------
+
+class FantasyCreatures(Enum):
+    FIRE_DRAGON = 'Fire Dragon'
+    GOBLIN_WARRIOR = 'Goblin Warrior'
+
+
+class FantasySpell(Enum):
+    FIREBALL = 'Fireball'
+    LIGHTNING_BOLT = 'Lightning Bolt'
+
+
+class FantasyArtifact(Enum):
+    MANA_RING = 'Mana Ring'
+
+
+# ----------------------------------------------------------------------------
+#  Effects
+# ----------------------------------------------------------------------------
+
+class Effects(Enum):
+    ATTACK = 'Permanent: +2 attack to equipped creature'
+    CARD = 'Permanent: Draw an extra card each turn'
+    COST = 'Permanent: +1 cost reduction to all cards'
+    HEALTH = 'Permanent: +3 health to all friendly creatures'
+    MANA = 'Permanent: +1 mana per turn'
 
 
 # ----------------------------------------------------------------------------
@@ -58,54 +76,86 @@ class FantasyCardFactory(CardFactory):
     """
 
     def __init__(self) -> None:
-        """The sum of all the fantasy cards"""
-        self._fantasy_creatures: List[Any] = []
-        for creature in Creatures:
-            if self._is_fantasy_card(creature.c_name):
-                self._fantasy_creatures.append(creature)
-
-        self._fantasy_spells: List[Any] = []
-        for spell in Spells:
-            if self._is_fantasy_card(spell.s_name):
-                self._fantasy_spells.append(spell)
-
-        self._fantasy_artifacts: List[Any] = []
-        for artifact in Artifacts:
-            if self._is_fantasy_card(artifact.a_name):
-                self._fantasy_artifacts.append(artifact)
+        pass
 
     def create_creature(self, name_or_power: str | int | None = None) -> Card:
         """Create fantasy-themed creatures (Dragons, Goblins, etc.)"""
 
-        if name_or_power is not None:
-            for c in self._fantasy_creatures:
-                if c.c_name == name_or_power or c.c_cost == name_or_power:
-                    return CreatureCard(*c.value)
+        if isinstance(name_or_power, str):
+            matching = [c for c in FantasyCreatures
+                        if c.value == name_or_power]
+            if matching:
+                name = name_or_power
+            else:
+                tmp = random.choice(list(FantasyCreatures))
+                name = tmp.value
+            cost = random.randint(1, 10)
 
-        c = random.choice(self._fantasy_creatures)
-        return CreatureCard(*c.value)
+        elif isinstance(name_or_power, int):
+            tmp = random.choice(list(FantasyCreatures))
+            name = tmp.value
+            cost = name_or_power
+
+        else:
+            tmp = random.choice(list(FantasyCreatures))
+            name = tmp.value
+            cost = random.randint(1, 10)
+
+        rarity = random.choice(list(Rarity)).value
+        attack = random.randint(1, 10)
+        health = random.randint(1, 10)
+
+        return CreatureCard(name, cost, rarity, attack, health)
 
     def create_spell(self, name_or_power: str | int | None = None) -> Card:
         """Creates elemental spells (Fire, Ice, Lightning)"""
 
-        if name_or_power is not None:
-            for s in self._fantasy_spells:
-                if s.s_name == name_or_power or s.s_cost == name_or_power:
-                    return SpellCard(*s.value)
+        if isinstance(name_or_power, str):
+            matching = [s for s in FantasySpell if s.value == name_or_power]
+            if matching:
+                name = name_or_power
+            cost = random.randint(1, 10)
 
-        s = random.choice(self._fantasy_spells)
-        return SpellCard(*s.value)
+        elif isinstance(name_or_power, int):
+            tmp = random.choice(list(FantasySpell))
+            name = tmp.value
+            cost = name_or_power
+
+        else:
+            tmp = random.choice(list(FantasySpell))
+            name = tmp.value
+            cost = random.randint(1, 10)
+
+        rarity = random.choice(list(Rarity)).value
+        effect_type = random.choice(list(EffectTypes)).value
+
+        return SpellCard(name, cost, rarity, effect_type)
 
     def create_artifact(self, name_or_power: str | int | None = None) -> Card:
         """Creates magical artifacts (Rings, Staffs, Crystals)"""
 
-        if name_or_power is not None:
-            for a in self._fantasy_artifacts:
-                if a.a_name == name_or_power or a.a_cost == name_or_power:
-                    return ArtifactCard(*a.value)
+        if isinstance(name_or_power, str):
+            matching = [a for a in FantasyArtifact if a.value == name_or_power]
+            if matching:
+                name = name_or_power
+            cost = random.randint(1, 10)
 
-        a = random.choice(self._fantasy_artifacts)
-        return ArtifactCard(*a.value)
+        elif isinstance(name_or_power, int):
+            tmp = random.choice(list(FantasyArtifact))
+            name = tmp.value
+            cost = name_or_power
+
+        else:
+            tmp = random.choice(list(FantasyArtifact))
+            name = tmp.value
+            cost = random.randint(1, 10)
+
+        rarity = random.choice(list(Rarity)).value
+
+        durability = random.randint(1, 10)
+        effect = random.choice(list(Effects,)).value
+
+        return ArtifactCard(name, cost, rarity, durability, effect)
 
     def create_themed_deck(self, size: int) -> Dict[str, Any]:
         """Create a deck containing size fantasy cards"""
@@ -129,26 +179,7 @@ class FantasyCardFactory(CardFactory):
 
     def get_supported_types(self) -> Dict[str, Any]:
         return {
-            'creatures': [c._name for c in CreaturesTypes],
-            'spells': [s._name for s in SpellTypes],
-            'artifacts': [a._name for a in ArtifactsTypes]
+            'creatures': [c.value for c in CreaturesTypes],
+            'spells': [s.value for s in SpellTypes],
+            'artifacts': [a.value for a in ArtifactsTypes]
         }
-
-    # ----------------------------------------------------------------------------
-    #  Helper function
-    # ----------------------------------------------------------------------------
-
-    def _is_fantasy_card(self, card_name: str) -> bool:
-        """Check if the card name matches the fantasy keywords."""
-
-        fantasy_keywords = (
-            [c._name for c in CreaturesTypes] +
-            [s._name for s in SpellTypes] +
-            [a._name for a in ArtifactsTypes]
-        )
-
-        for keyword in fantasy_keywords:
-            if keyword in card_name:
-                return True
-
-        return False
