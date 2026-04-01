@@ -6,44 +6,8 @@ Instant magic effects.
 from typing import Dict, Any, List
 from enum import Enum
 import random
-
 from ex0 import Card
 
-
-# ----------------------------------------------------------------------------
-#  Spells Register
-# ----------------------------------------------------------------------------
-
-class Spells(Enum):
-    LIGHTNING_BOLT = ("Lightning Bolt", 3, "Common", "damage")
-    HEALING_POTION = ("Healing Potion", 2, "Common", "heal")
-    FIREBALL = ("Fireball", 4, "Uncommon", "damage")
-    SHIELD_SPELL = ("Shield Spell", 1, "Common", "buff")
-    METEOR = ("Meteor", 8, "Legendary", "damage")
-    ICE_SHARD = ("Ice Shard", 2, "Common", "damage")
-    DIVINE_LIGHT = ("Divine Light", 5, "Rare", "heal")
-    MAGIC_MISSILE = ("Magic Missile", 1, "Common", "damage")
-
-    @property
-    def s_name(self) -> str:
-        return self.value[0]
-
-    @property
-    def s_cost(self) -> int:
-        return self.value[1]
-
-    @property
-    def s_rarity(self) -> str:
-        return self.value[2]
-
-    @property
-    def s_effect(self) -> str:
-        return self.value[3]
-
-
-# ----------------------------------------------------------------------------
-#  SpellCard
-# ----------------------------------------------------------------------------
 
 class SpellCard(Card):
     """Processes instant magical effects"""
