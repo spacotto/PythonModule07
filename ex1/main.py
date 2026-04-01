@@ -89,7 +89,7 @@ def main() -> None:
         for _ in range(3):
             print()
             card = deck.draw_card()
-            print(f' Drew: {card._name}')
+            print(f' Drew: {card._name} ({card._type})')
             game_state = card.play(game_state)
             print(f' Play result: {game_state["play"]}')
 
