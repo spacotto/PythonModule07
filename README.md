@@ -14,7 +14,7 @@ Execute the module tester:
 python3 -m exN.main
 ```
 
->[NOTE]
+>[!NOTE]
 >Change N with the number of the module. For example, `python3 -m ex0.main`
 
 ## Theoretical Concepts
