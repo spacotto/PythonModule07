@@ -5,11 +5,13 @@
 ## Instructions
 
 Git clone the repository:
+
 ```bash
 git clone https://github.com/spacotto/Python_Module07.git
 ```
 
 Execute the module tester:
+
 ```bash
 python3 -m exN.main
 ```
@@ -20,4 +22,4 @@ python3 -m exN.main
 ## Theoretical Concepts
 
 The theoretical concepts covered in this module are documented in my separate notes repository: 
-- PYTHON 101
+- [PYTHON 101 — PART VI: OBJECT-ORIENTED PROGRAMMING](https://github.com/spacotto/grimoire/blob/main/python/index_python.md#part-vi-object-oriented-programming)
